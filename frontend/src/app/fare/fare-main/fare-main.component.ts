@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { Fare } from './../fare.model';
 import { FareService } from './../fare.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-fare',
@@ -8,15 +11,37 @@ import { FareService } from './../fare.service';
 })
 export class FareMainComponent implements OnInit {
 
-  gastos: any;
+  gastos: Fare[];
 
-  constructor (private fareService: FareService) { }
+  constructor (
+    private fareService: FareService,
+    private router: Router
+  ) { }
 
-  adicionar() {
-    window.alert('Fazendo gastos ai né vagabundo...\nTem certeza disso?');
+  Novo() {
+   this.router.navigate(['/form']);
   }
 
   ngOnInit() {
-    this.gastos = this.fareService.find();
+    this.fareService.find().subscribe(response => {
+      this.gastos = response;
+    });
+  }
+
+  dateFormat(dateNumber: number): String {
+    return moment(dateNumber, 'YYYYMMDD').locale('pt-br').format('L');
+  }
+
+  create(event): void {
+    this.fareService.create(event.data).subscribe();
+  }
+
+  update(event): void {
+    console.log(event.data);
+    this.fareService.update(event.data._id, event.data).subscribe();
+  }
+
+  delete(event): void {
+    this.fareService.delete(event.data._id).subscribe();
   }
 }

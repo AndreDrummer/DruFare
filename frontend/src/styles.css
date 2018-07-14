@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/bootstrap/dist/css/bootstrap.min.css'; */
-/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/admin-lte/dist/css/adminlte.min.css'; */
-/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/admin-lte/dist/css/adminlte.css'; */
-/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/font-awesome/css/font-awesome.css'; */
+ @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+ @import '../node_modules/admin-lte/dist/css/adminlte.min.css';
+ @import '../node_modules/admin-lte/dist/css/adminlte.css';
+ @import '../node_modules/font-awesome/css/font-awesome.css';
+ @import '../node_modules/material-icons/css/material-icons.css';
 
 @import "../node_modules/devextreme/dist/css/dx.common.css";
 @import "../node_modules/devextreme/dist/css/dx.light.compact.css";

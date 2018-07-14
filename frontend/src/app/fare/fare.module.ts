@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FareMainComponent } from './fare-main/fare-main.component';
 import { FareFormComponent } from './fare-form/fare-form.component';
 import { FareRoutingModule } from './fare.routing.module';
-import { FareService } from './fare.service';
 
 // Devextreme Import
 import { DxDateBoxModule } from 'devextreme-angular/ui/date-box';
@@ -25,7 +24,7 @@ import { DxButtonModule } from 'devextreme-angular';
     DxNumberBoxModule,
     DxDataGridModule,
     DxButtonModule,
-    ReactiveFormsModule,    
+    ReactiveFormsModule,
   ],
   declarations: [
     FareFormComponent,

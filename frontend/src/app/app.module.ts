@@ -11,11 +11,11 @@ import { FareModule } from './fare/fare.module';
 import { ROUTES } from './app.routes';
 
 // Devestreme internatinalization
-// import { locale, loadMessages } from 'devextreme/localization';
-// import 'devextreme-intl';
+import { locale, loadMessages } from 'devextreme/localization';
+import 'devextreme-intl';
 
 // loadMessages(require('../assets/scripts/devextreme.pt-BR.json'));
-// locale('pt-BR');
+locale('pt-BR');
 
 @NgModule({
   declarations: [
