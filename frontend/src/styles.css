@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/bootstrap/dist/css/bootstrap.min.css'; */
+/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/admin-lte/dist/css/adminlte.min.css'; */
+/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/admin-lte/dist/css/adminlte.css'; */
+/* @import 'C:/Users/Andre Felipe Drumer/Desktop/MarketProject/Market/node_modules/font-awesome/css/font-awesome.css'; */
+
+@import "../node_modules/devextreme/dist/css/dx.common.css";
+@import "../node_modules/devextreme/dist/css/dx.light.compact.css";
+@import "../node_modules/animate.css/animate.min.css";
+
+.home {
+  background-color: #fff;
+  text-align: center;
+}
+
+.home h2 {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.welcome-home h1 {
+  margin-bottom: 30px;
+}
+
+.welcome-home p {
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+.welcome-home a {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.fareAlign {
+  display: block;
+  position: relative;
+}
+
+.buttonDetail {
+  padding: 10px;
+  margin-left: 20px;
+  margin-top: 7px;
+  border-radius: 10px;
+}
+
+.add {
+  display: inline;
+  position: relative;
+  left: 200px;
+}
+
+.forms{
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+.addButton{
+  display: block;
+  position: relative;
+}

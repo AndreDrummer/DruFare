@@ -1,0 +1,82 @@
+<section class="content-header">
+  <h1> Mês Vigente - Julho</h1>
+</section>
+
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-12">
+      <button mat-raised-button mat-min-fab class="btn btn-success btn-round btn-fab pull-right fa fa-plus" title="Novo"></button>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="row">
+    <div class="row">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-red">
+            <i class="fa fa-cc-visa"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Cartão de Crédito</span>
+            <span class="info-box-number">
+              <small>R$ 625,03</small>
+              <a class="btn btn-primary btn-sm buttonDetail" title="Detalhes" href="#">
+                <i class="fa fa-eye"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-yellow">
+            <i class="fa fa-money"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Dinheiro</span>
+            <span class="info-box-number">
+              <small>R$ 305,00</small>
+              <a class="btn btn-primary btn-sm buttonDetail" title="Detalhes" href="#">
+                <i class="fa fa-eye"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-green">
+            <i class="fa fa-dollar"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Total Gasto</span>
+            <span class="info-box-number">
+              <small>R$ 930,03</small>
+              <a class="btn btn-primary btn-sm buttonDetail" title="Detalhes" href="#">
+                <i class="fa fa-eye"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-8 col-xs-12">
+        <dx-data-grid [dataSource]="gastos" [showColumnLines]="true" [showRowLines]="true" [showBorders]="true" [rowAlternationEnabled]="true"
+          [columnAutoWidth]="true">
+
+          <dxo-editing mode="form" [allowDeleting]="true" [useIcons]="true">
+          </dxo-editing>
+
+          <dxi-column dataField="name" caption="Nome"></dxi-column>
+          <dxi-column dataField="value" format="R$ #,##0.##" caption="Valor"></dxi-column>
+          <dxi-column dataField="date" caption="Data"></dxi-column>
+          <dxi-column dataField="paymentForm" caption="Forma de Pagamento"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+
+</section>

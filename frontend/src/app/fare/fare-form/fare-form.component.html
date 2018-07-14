@@ -1,0 +1,40 @@
+<section class="content-header welcome-home">
+</section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-8 col-xs-12">
+    <div class="box box-success">
+      <div class="box-header">
+        <h4 class="box-title">Registrar Novo Gasto</h4>
+      </div>
+      <div class="box-body">
+        <form role="form" autocomplete="off" [formGroup]="fareForm">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6 col-sm-8 col-xs-12 forms">
+                <label>Gastou com o quê?</label>
+                <dx-text-box height="35" formControlName="name"></dx-text-box>
+              </div>
+              <div class="col-md-6 col-sm-8 col-xs-12 forms">
+                <label>Que dia foi?</label>
+                <dx-date-box width="100%" height="35" formControlName="date"></dx-date-box>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-8 col-xs-12 forms">
+                <label>Quanto custou?</label>
+                <dx-number-box format="R$ #,##0,##" height="35" formControlName="value"></dx-number-box>
+              </div>
+              <div class="col-md-6 col-sm-8 col-xs-12 forms">
+                <label>Pagou como?</label>
+                <dx-select-box [dataSource]="['Cartão de Crédito', 'Dinheiro']" height="35" formControlName="paymentForm"></dx-select-box>
+              </div>
+            </div>
+            <dx-button [useSubmitBehavior]="true" type="success" text="Registrar" [routerLink]="['/fares']" (click)="onRegister()"></dx-button>
+            <dx-button [useSubmitBehavior]="true" type="primary" text="Cancelar" [routerLink]="['/fares']" (click)="cancelButton()"></dx-button>            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
