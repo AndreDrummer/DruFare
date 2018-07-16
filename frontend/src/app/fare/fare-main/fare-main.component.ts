@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Fare } from './../fare.model';
+import { Fare, Resume } from './../fare.model';
 import { FareService } from './../fare.service';
 import * as moment from 'moment';
 
@@ -12,6 +12,23 @@ import * as moment from 'moment';
 export class FareMainComponent implements OnInit {
 
   gastos: Fare[];
+
+  cardValue = 0;
+  moneyValue = 0;
+  totalValue = 0;
+
+  resumes: Resume[] = [
+    {
+      name: 'Cartão',
+      value: 0,
+      color: 'red'
+    },
+    {
+      name: 'Dinheiro',
+      value: 0,
+      color: 'yellow'
+    }
+  ];
 
   constructor (
     private fareService: FareService,
@@ -25,6 +42,17 @@ export class FareMainComponent implements OnInit {
   ngOnInit() {
     this.fareService.find().subscribe(response => {
       this.gastos = response;
+    });
+
+    this.fareService.find().subscribe(response => {
+      response.filter(item => {
+        if (item.paymentForm === 'Cartão') {
+          this.cardValue += item.value;
+        } else if (item.paymentForm === 'Dinheiro') {
+          this.moneyValue += item.value;
+        }
+        this.totalValue += item.value;
+      });
     });
   }
 

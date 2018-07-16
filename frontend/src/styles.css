@@ -11,8 +11,11 @@
 @import "../node_modules/animate.css/animate.min.css";
 
 .home {
+  display: block;
+  position: relative;
   background-color: #fff;
   text-align: center;
+  top: 60px;
 }
 
 .home h2 {
@@ -46,9 +49,9 @@
 }
 
 .add {
-  display: inline;
+  display: block;
   position: relative;
-  left: 200px;
+  right: 15px;
 }
 
 .forms{
@@ -60,3 +63,4 @@
   display: block;
   position: relative;
 }
+

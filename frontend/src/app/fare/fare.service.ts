@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Fare } from './fare.model';
@@ -14,8 +14,12 @@ export class FareService {
 
   constructor(private http: HttpClient) { }
 
-  find(): Observable<Fare[]> {
-    return this.http.get<Fare[]>(`${URL}`);
+  find(tipo?: string): Observable<Fare[]> {
+    let params: HttpParams;
+    if (tipo) {
+      params = new HttpParams().append('paymentForm', tipo);
+    }
+    return this.http.get<Fare[]>(`${URL}`, {params});
   }
 
   findById(fareId: string): Observable<Fare> {

@@ -4,3 +4,9 @@ export class Fare {
   value: number;
   paymentForm: string;
 }
+
+export interface Resume {
+  name: string;
+  value: number;
+  color: string;
+}

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import * as moment from 'moment';
 import swal from 'sweetalert';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-fare-form',
@@ -19,7 +20,7 @@ export class FareFormComponent implements OnInit {
 
   get fareId(): string {
     if (!this._fareId) {
-      this._fareId = this.route.snapshot.params._id;
+      this._fareId = this.route.snapshot.queryParams.id;
     }
     return this._fareId;
   }
@@ -36,6 +37,7 @@ export class FareFormComponent implements OnInit {
   ) { }
 
   ngOnInit () {
+    console.log(this.route.snapshot.queryParams.id);
     this.fareForm = this.fb.group({
       name: this.fb.control('', [Validators.required]),
       date: this.fb.control('', [Validators.required]),
@@ -47,7 +49,7 @@ export class FareFormComponent implements OnInit {
       this.fareService.findById(this.fareId).subscribe(response => {
         console.log(response);
       this.fareForm.patchValue(response);
-      this.fareForm.patchValue({date:  moment(response.date).format('YYYYMMDD')});
+      this.fareForm.patchValue({date:  moment(response.date, 'YYYYMMDD')});
       });
     }
   }
@@ -55,11 +57,11 @@ export class FareFormComponent implements OnInit {
   onRegister() {
     if (this.fareForm.valid) {
       swal({
-        title: `${this.isEditing() ? 'Atualizar' : 'Salvar'} gasto?`,
+        title: `${this.isEditing() ? 'Atualizar' : 'Registrar'} gasto?`,
         icon: 'warning',
         buttons: {
           cancel: { text: 'Calma aí', visible: true},
-          confirm: { text: `Pode ${this.isEditing() ? 'Salvar' : 'Atualizar'}.`},
+          confirm: { text: `Pode ${this.isEditing() ? 'Atualizar' : 'Registrar'}.`},
         },
         dangerMode: true
       }).then(willSave => {
@@ -80,9 +82,18 @@ export class FareFormComponent implements OnInit {
         }).then((fare: any) => {
           if (fare) {
             this.router.navigate(['/fares']);
-            swal(`Gasto ${this.isEditing() ? 'atualizado' : 'salvo'} com sucesso!`, {icon: 'success'});
+            swal(`Gasto ${this.isEditing() ? 'atualizado' : 'registrado'} com sucesso!`, {icon: 'success'});
           }
       });
+    } else {
+      notify({
+        width: '100',
+        message: 'Você deve preencher todos os campos!',
+        position: {
+          my: 'center right',
+          at: 'left right'
+        }
+      }, 'error', 3000);
     }
   }
 }

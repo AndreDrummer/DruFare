@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FareMainComponent } from './fare-main/fare-main.component';
 import { FareFormComponent } from './fare-form/fare-form.component';
 import { FareRoutingModule } from './fare.routing.module';
+import { ResumeComponent } from './fare-main/resume/resume.component';
 
 // Devextreme Import
 import { DxDateBoxModule } from 'devextreme-angular/ui/date-box';
@@ -13,6 +14,7 @@ import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
 import { DxNumberBoxModule } from 'devextreme-angular/ui/number-box';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxButtonModule } from 'devextreme-angular';
+import { DxFormModule } from 'devextreme-angular';
 
 @NgModule({
   imports: [
@@ -24,15 +26,18 @@ import { DxButtonModule } from 'devextreme-angular';
     DxNumberBoxModule,
     DxDataGridModule,
     DxButtonModule,
+    DxFormModule,
     ReactiveFormsModule,
   ],
   declarations: [
     FareFormComponent,
-    FareMainComponent
+    FareMainComponent,
+    ResumeComponent
   ],
   exports: [
     FareFormComponent,
     FareMainComponent,
+    ResumeComponent,
     ReactiveFormsModule
   ]
 })
