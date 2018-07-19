@@ -7,5 +7,8 @@ module.exports = function(server){
 
   //Rotas relacionadas aos Spents
   const spents = require('../api/spents/spentsService');
+  const cycles = require('../api/cycles/cyclesService');
   spents.register(router, '/spents');
+  cycles.register(router, '/cycles');
+  
 }

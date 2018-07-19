@@ -6,11 +6,17 @@
  @import '../node_modules/font-awesome/css/font-awesome.css';
  @import '../node_modules/material-icons/css/material-icons.css';
 
+/* @import 'C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/admin-lte/dist/css/adminlte.css';
+@import 'C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/admin-lte/dist/css/adminlte.min.css';
+@import "C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/font-awesome/css/font-awesome.css"; */
+
+
 @import "../node_modules/devextreme/dist/css/dx.common.css";
 @import "../node_modules/devextreme/dist/css/dx.light.compact.css";
 @import "../node_modules/animate.css/animate.min.css";
 
-.home {
+ .home {
   display: block;
   position: relative;
   background-color: #fff;
@@ -48,10 +54,18 @@
   border-radius: 10px;
 }
 
-.add {
+.addRight {
   display: block;
   position: relative;
   right: 15px;
+}
+
+
+.addLeft {
+  display: block;
+  position: relative;
+  left: 10px;
+  margin-bottom: 10px;
 }
 
 .forms{
@@ -62,5 +76,20 @@
 .addButton{
   display: block;
   position: relative;
+}
+
+.plusHome {
+  display: block;
+  position: relative;
+  text-align: center;
+  opacity: 0.6;
+  top: 50px;
+  border-radius: 30px;
+  background-color:  rgb(109, 230, 159);
+}
+
+.plusHome:hover{
+  opacity: 0.8;
+  background-color:  rgb(2, 192, 81);
 }
 

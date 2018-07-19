@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { FareModule } from './fare/fare.module';
+import { NovoModule } from './novo/novo.module';
 
 import { ROUTES } from './app.routes';
 
@@ -28,6 +29,7 @@ locale('pt-BR');
     BrowserModule,
     RouterModule,
     FareModule,
+    NovoModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [],

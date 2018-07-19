@@ -14,7 +14,8 @@ import { DxTextBoxModule } from 'devextreme-angular/ui/text-box';
 import { DxNumberBoxModule } from 'devextreme-angular/ui/number-box';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { DxButtonModule } from 'devextreme-angular';
-import { DxFormModule } from 'devextreme-angular';
+import { DxValidatorModule } from 'devextreme-angular/ui/validator';
+import { DxValidationSummaryModule } from 'devextreme-angular/ui/validation-summary';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { DxFormModule } from 'devextreme-angular';
     DxNumberBoxModule,
     DxDataGridModule,
     DxButtonModule,
-    DxFormModule,
+    DxValidatorModule,
+    DxValidationSummaryModule,
     ReactiveFormsModule,
   ],
   declarations: [

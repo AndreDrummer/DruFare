@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  title = `Voceê ainda nao fez nenhum gasto!\nClique em '+' para começar anotar`;
   constructor() { }
 }

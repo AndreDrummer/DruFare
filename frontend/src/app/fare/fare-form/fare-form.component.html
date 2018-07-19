@@ -2,10 +2,15 @@
 </section>
 
 <div class="row">
-  <div class="col-md-12 col-sm-8 col-xs-12">
+  <div class="col-md-11 col-sm-8 col-xs-12">
     <div class="box box-success">
       <div class="box-header">
         <h4 class="box-title">Registrar Novo Gasto</h4>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+            <button mat-raised-button mat-min-fab class="addLeft btn btn-primary btn-round btn-fab pull-left fa fa-arrow-left" title="Voltar" onclick="javascript:history.go(-1)"></button>
+          </div>
       </div>
       <div class="box-body">
         <form role="form" autocomplete="off" [formGroup]="fareForm">
@@ -13,26 +18,42 @@
             <div class="row">
               <div class="col-md-6 col-sm-8 col-xs-12 forms">
                 <label>Gastou com o quê?</label>
-                <dx-text-box height="35" formControlName="name"></dx-text-box>
+                <dx-text-box height="35" formControlName="name">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Você deve dizer com o quê gastou!"></dxi-validation-rule>
+                </dx-validator>
+                </dx-text-box>
               </div>
               <div class="col-md-6 col-sm-8 col-xs-12 forms">
                 <label>Que dia foi?</label>
-                <dx-date-box width="100%" height="35" formControlName="date"></dx-date-box>
+                <dx-date-box width="100%" height="35" formControlName="date">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="Você deve dizer que dia foi!"></dxi-validation-rule>
+                  </dx-validator>
+                </dx-date-box>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 col-sm-8 col-xs-12 forms">
                 <label>Quanto custou?</label>
-                <dx-number-box format="R$ #,##0.##" height="35" formControlName="value"></dx-number-box>
+                <dx-number-box format="R$ #,##0.##" height="35" formControlName="value">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="Você deve dizer que valor custou!"></dxi-validation-rule>
+                  </dx-validator>
+                </dx-number-box>
               </div>
               <div class="col-md-6 col-sm-8 col-xs-12 forms">
                 <label>Pagou como?</label>
-                <dx-select-box [dataSource]="['Cartão', 'Dinheiro']" height="35" formControlName="paymentForm"></dx-select-box>
+                <dx-select-box [dataSource]="['Cartão', 'Dinheiro']" height="35" formControlName="paymentForm">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="Você deve dizer como pagou isso!"></dxi-validation-rule>
+                  </dx-validator>
+                </dx-select-box>
               </div>
             </div>
             <dx-button [useSubmitBehavior]="true" type="success" text="Registrar" (click)="onRegister()"></dx-button>
-            <dx-button [useSubmitBehavior]="true" type="primary" text="Cancelar" [routerLink]="['/fares']"></dx-button>
           </div>
+          <dx-validation-summary id="summary"></dx-validation-summary>
         </form>
       </div>
     </div>

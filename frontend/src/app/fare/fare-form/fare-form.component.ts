@@ -17,6 +17,8 @@ export class FareFormComponent implements OnInit {
   gastos: any;
   _fareId: string;
   fareForm: FormGroup;
+  ano: string;
+  mes: string;
 
   get fareId(): string {
     if (!this._fareId) {
@@ -37,7 +39,9 @@ export class FareFormComponent implements OnInit {
   ) { }
 
   ngOnInit () {
-    console.log(this.route.snapshot.queryParams.id);
+    this.mes = this.route.snapshot.queryParams.mes;
+    this.ano = this.route.snapshot.queryParams.ano;
+
     this.fareForm = this.fb.group({
       name: this.fb.control('', [Validators.required]),
       date: this.fb.control('', [Validators.required]),
@@ -67,10 +71,15 @@ export class FareFormComponent implements OnInit {
       }).then(willSave => {
         return new Promise(resolve => {
           if (willSave) {
+
             const fare = this.fareForm.value;
 
+            fare.ano = this.ano;
+            fare.mes = this.mes;
             fare.date = moment(fare.date).format('YYYYMMDD');
+
             if (this.isEditing()) {
+              console.log(fare);
               this.fareService.update(this.fareId, fare).subscribe(res => resolve(res));
             } else {
               this.fareService.create(fare).subscribe(res => resolve(res));
@@ -81,17 +90,17 @@ export class FareFormComponent implements OnInit {
         });
         }).then((fare: any) => {
           if (fare) {
-            this.router.navigate(['/fares']);
+            this.router.navigate(['/fares'], { queryParams: {ano: this.ano, mes: this.mes}});
             swal(`Gasto ${this.isEditing() ? 'atualizado' : 'registrado'} com sucesso!`, {icon: 'success'});
           }
       });
     } else {
       notify({
-        width: '100',
+        width: '300',
         message: 'Você deve preencher todos os campos!',
         position: {
-          my: 'center right',
-          at: 'left right'
+          my: 'center center',
+          at: 'center center'
         }
       }, 'error', 3000);
     }

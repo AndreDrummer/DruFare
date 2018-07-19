@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Fare } from './fare.model';
-import { FareRoutingModule } from './fare.routing.module';
+import { Novo } from '../novo/novo.model';
 import { URL } from './base-url';
 
 import { Observable } from 'rxjs';
@@ -14,10 +14,18 @@ export class FareService {
 
   constructor(private http: HttpClient) { }
 
-  find(tipo?: string): Observable<Fare[]> {
+  findPay(payment?: string): Observable<Fare[]> {
     let params: HttpParams;
-    if (tipo) {
-      params = new HttpParams().append('paymentForm', tipo);
+    if (payment) {
+      params = new HttpParams().append('paymentForm', payment);
+    }
+    return this.http.get<Fare[]>(`${URL}`, {params});
+  }
+
+  find(payment?: string): Observable<Fare[]> {
+    let params: HttpParams;
+    if (payment) {
+      params = new HttpParams().append('paymentForm', payment);
     }
     return this.http.get<Fare[]>(`${URL}`, {params});
   }
@@ -31,7 +39,7 @@ export class FareService {
   }
 
   update(fareId: string, gasto: Fare): Observable<Fare> {
-   return this.http.patch<Fare>(`${URL}/${fareId}`, gasto);
+   return this.http.put<Fare>(`${URL}/${fareId}`, gasto);
   }
 
   delete(fareId: string): Observable<any> {

@@ -1,9 +1,12 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Fare, Resume } from './../fare.model';
+import { Fare } from './../fare.model';
+import { Resume } from './resume/resume.model';
+import { NovoService } from './../../novo/novo.service';
 import { FareService } from './../fare.service';
 import * as moment from 'moment';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-fare',
@@ -12,6 +15,9 @@ import * as moment from 'moment';
 export class FareMainComponent implements OnInit {
 
   gastos: Fare[];
+  mes: string;
+  ano: string;
+  title: string;
 
   cardValue = 0;
   moneyValue = 0;
@@ -21,40 +27,64 @@ export class FareMainComponent implements OnInit {
     {
       name: 'Cartão',
       value: 0,
-      color: 'red'
+      color: 'red',
+      icon: 'cc-visa'
     },
     {
       name: 'Dinheiro',
       value: 0,
-      color: 'yellow'
+      color: 'yellow',
+      icon: 'money'
     }
   ];
 
-  constructor (
-    private fareService: FareService,
-    private router: Router
-  ) { }
-
-  Novo() {
-   this.router.navigate(['/form']);
+  private params(): boolean {
+    const mes = this.route.snapshot.queryParams.mes;
+    const ano = this.route.snapshot.queryParams.ano;
+    return mes && ano ? true : false;
   }
 
-  ngOnInit() {
-    this.fareService.find().subscribe(response => {
-      this.gastos = response;
-    });
+  constructor (
+    private fareService: FareService,
+    private novoService: NovoService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
-    this.fareService.find().subscribe(response => {
-      response.filter(item => {
-        if (item.paymentForm === 'Cartão') {
-          this.cardValue += item.value;
-        } else if (item.paymentForm === 'Dinheiro') {
-          this.moneyValue += item.value;
+  ngOnInit() {
+    this.mes = this.route.snapshot.queryParams.mes;
+    this.ano = this.route.snapshot.queryParams.ano;
+    this.title = `${this.mes} de ${this.ano}`;
+
+      this.fareService.find().subscribe(response => {
+        response.filter(item => {
+        if (item.mes === this.mes && item.ano === this.ano) {
+          if (item.paymentForm === 'Cartão') {
+            this.cardValue += item.value;
+          } else if (item.paymentForm === 'Dinheiro') {
+            this.moneyValue += item.value;
+          }
+          this.totalValue += item.value;
+          this.gastos = response;
         }
-        this.totalValue += item.value;
       });
     });
   }
+
+  Novo() {
+    if (this.params()) {
+      this.router.navigate(['/form'] , { queryParams: {ano: this.ano, mes: this.mes}});
+    } else {
+      notify({
+        width: '500',
+        message: 'Você deve voltar à Página Inicial e começar um ciclo para registrar seus gastos!',
+        position: {
+          my: 'center center',
+          at: 'center center'
+        }
+      }, 'error', 7000);
+    }
+   }
 
   dateFormat(dateNumber: number): String {
     return moment(dateNumber, 'YYYYMMDD').locale('pt-br').format('L');
@@ -70,6 +100,10 @@ export class FareMainComponent implements OnInit {
   }
 
   delete(event): void {
+    const dados = event.data;
+    const ano = dados.ano;
+    const mes = dados.mes;
+    // this.novoService.delete(ano, mes);
     this.fareService.delete(event.data._id).subscribe();
   }
 }

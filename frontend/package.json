@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "dev": "nodemon"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,7 @@
     "intl": "^1.2.5",
     "material-icons": "^0.2.3",
     "moment": "^2.22.2",
+    "nodemon": "^1.18.3",
     "rxjs": "^6.0.0",
     "sweetalert": "^2.1.0",
     "zone.js": "^0.8.26"

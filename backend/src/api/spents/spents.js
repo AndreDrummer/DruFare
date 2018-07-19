@@ -9,5 +9,14 @@ const spentsSchema = new mongoose.Schema({
   value: { type: Number, min: 0, required: true }
 });
 
+const spents = new mongoose.Schema({
+  ano: { type: String, required: true },
+  mes: { type: String, required: true },
+  name: { type: String, required: true },
+  date: { type: Number, min: 19101201, max: 21001201, required: [true, 'Data inválida!'] },
+  paymentForm: { type: String, required: true },
+  value: { type: Number, min: 0, required: true }
+})
 
-module.exports = restful.model('spents', spentsSchema);
+
+module.exports = restful.model('spents', spents);

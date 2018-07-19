@@ -3,10 +3,6 @@ export class Fare {
   date: Date;
   value: number;
   paymentForm: string;
-}
-
-export interface Resume {
-  name: string;
-  value: number;
-  color: string;
+  ano: string;
+  mes: string;
 }

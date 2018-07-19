@@ -1,11 +1,19 @@
 <section class="content-header">
-  <h1> Mês Vigente - Julho</h1>
+  <div *ngIf="!params()">
+    <p>
+    Este(s) registro(s) não faz
+    parte de nehum ciclo.
+    Vá para <a href="#">Página Inicial</a>
+    e comece um novo ciclo!`
+      </p>
+  </div>
+  <h1 *ngIf="params()">{{title}}</h1>
 </section>
 
 <!--Botão Add-->
 <div class="row">
-  <div class="col-md-12">
-    <button mat-raised-button mat-min-fab class="add btn btn-success btn-round btn-fab pull-right fa fa-plus" title="Novo Gasto" (click)="Novo()"></button>
+  <div class="col-md-11">
+    <button mat-raised-button mat-min-fab class="addRight btn btn-success btn-round btn-fab pull-right fa fa-plus" title="Novo Gasto" (click)="Novo()"></button>
   </div>
 </div>
 <!--Fim do botão Add-->
@@ -13,14 +21,14 @@
 <!--Cards Info-->
 <section class="content">
   <div class="row">
-    <div class="col-md-12 col-sm-8 col-xs-12">
+    <div class="col-md-11 col-sm-8 col-xs-12">
       <div class="row">
-        <div *ngFor="let gasto of resumes" class="col-md-4 col-sm-8 col-xs-12">
-          <div *ngIf="gasto.name === 'Cartão'">
-              <app-resume [resume]="gasto" [value]="cardValue"></app-resume>
+        <div *ngFor="let item of resumes" class="col-md-4 col-sm-8 col-xs-12">
+          <div *ngIf="item.name === 'Cartão'">
+              <app-resume [resume]="item" [value]="cardValue"></app-resume>
           </div>
-          <div *ngIf="gasto.name === 'Dinheiro'">
-              <app-resume [resume]="gasto" [value]="moneyValue"></app-resume>
+          <div *ngIf="item.name === 'Dinheiro'">
+              <app-resume [resume]="item" [value]="moneyValue"></app-resume>
           </div>
         </div>
 
@@ -31,11 +39,9 @@
               </span>
               <div class="info-box-content">
                 <span class="info-box-text">Total Gasto</span>
-                <span class="info-box-number">
-                  <h1>
-                    <b>R$ {{totalValue}}</b>
-                  </h1>
-                </span>
+                <h3>
+                  <b>R$ {{totalValue}}</b>
+                </h3>
               </div>
             </div>
         </div>
@@ -47,7 +53,7 @@
 
   <!--Inserção da Grid-->
   <div class="row">
-    <div class="col-md-12 col-sm-8 col-xs-12">
+    <div class="col-md-11 col-sm-8 col-xs-12">
       <dx-data-grid
         [dataSource]="gastos"
         [showColumnLines]="true"
@@ -71,9 +77,9 @@
         </dxo-editing>
 
         <dxi-column dataField="name" caption="Nome" cellTemplate="nameTemplate"></dxi-column>
-        <dxi-column dataField="value" format="R$ #,##0.##" caption="Valor"></dxi-column>
-        <dxi-column dataField="date" caption="Data" cellTemplate="dateTemplate"></dxi-column>
-        <dxi-column dataField="paymentForm" caption="Pagamento"></dxi-column>
+        <dxi-column dataField="value" width="70" format="R$ #,##0.##" caption="Valor"></dxi-column>
+        <dxi-column dataField="date" width="70" caption="Data" cellTemplate="dateTemplate"></dxi-column>
+        <dxi-column dataField="paymentForm" width="70" caption="Pagamento"></dxi-column>
 
         <div *dxTemplate="let item of 'dateTemplate'">
           {{dateFormat(item.data.date)}}

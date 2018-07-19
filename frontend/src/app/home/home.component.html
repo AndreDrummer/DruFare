@@ -1,4 +1,4 @@
-<section class="content-header">
+<!-- <section class="content-header">
 </section>
 
 <section class="content">
@@ -8,9 +8,28 @@
     <p>
       Este é o <strong><em>DruFare</em></strong>, <br />o seu gerenciador de gastos pessoais.
     </p>
-    <a class="btn btn-primary btn-sm" [routerLink]="['/fares']">Começar</a>
+    <a class="btn btn-success btn-sm" [routerLink]="['/fares']">Começar</a>
   </div>
-</section>
+</section> -->
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{title}}</h4>
+        </div>
+      </div>
+  </div>
+</div>
+
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="row">
+            <button [routerLink]="['/novo']" title="Iniciar Novo Ciclo" type="button" class="bmd-btn-fab plusHome pull-right">
+              <i class="fa fa-plus"></i>
+            </button>
+        </div>
+      </div>
+    </div>
 
 
 <!-- <section class="content-header">
