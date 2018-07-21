@@ -86,7 +86,7 @@
         </div>
 
         <div *dxTemplate="let item of 'nameTemplate'">
-          <a [routerLink]="['/form']" [queryParams]="{id: item.data._id}">{{item.data.name}}</a>
+          <a [routerLink]="['/form']" [queryParams]="{idIn: item.data._id, idEx: idEx}">{{item.data.name}}</a>
         </div>
 
       </dx-data-grid>

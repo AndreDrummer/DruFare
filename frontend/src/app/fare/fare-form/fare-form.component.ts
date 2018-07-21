@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -17,28 +18,30 @@ import { Novo } from './../../novo/novo.model';
 export class FareFormComponent implements OnInit {
 
   gastos: any;
-  _fareId: string;
-  _novoId: string;
+  _idEx: string;
   fareForm: FormGroup;
   ano: string;
   mes: string;
-  resposta: Novo;
+  _idIn: string;
 
-  get fareId(): string {
-    if (!this._fareId) {
-      this._fareId = this.route.snapshot.queryParams.id;
+  // idEx é o id do elemento Mes/Ano o id Externo;
+  get idEx(): string {
+    if (!this._idEx) {
+      this._idEx = this.route.snapshot.queryParams.idEx;
     }
-    return this._fareId;
+    return this._idEx;
   }
-  get novoId(): string {
-    if (!this._novoId) {
-      this._novoId = this.route.snapshot.queryParams.idNovo;
+
+  // idIn é o id interno do array de gastos;
+  get idIn(): string {
+    if (!this._idIn) {
+      this._idIn = this.route.snapshot.queryParams.idIn;
     }
-    return this._novoId;
+    return this._idIn;
   }
 
   private isEditing(): boolean {
-    return this.fareId ? true : false;
+    return this.idIn ? true : false;
   }
 
   constructor(
@@ -59,13 +62,18 @@ export class FareFormComponent implements OnInit {
       paymentForm: this.fb.control('', [Validators.required])
     });
 
-    // if (this.isEditing()) {
-    //   this.fareService.findById(this.fareId).subscribe(response => {
-    //     console.log(response);
-    //   this.fareForm.patchValue(response);
-    //   this.fareForm.patchValue({date:  moment(response., 'YYYYMMDD')});
-    //   });
-    // }
+    if (this.isEditing()) {
+      this.fareService.findById(this.idEx).subscribe(response => {
+        const fares = response.fare;
+        fares.forEach(item => {
+          const dado = item._id;
+          if (dado === this.idIn) {
+            this.fareForm.patchValue(item);
+            this.fareForm.patchValue({date:  moment(item.date, 'YYYYMMDD')});
+          }
+        });
+      });
+    }
   }
 
   onRegister() {
@@ -85,17 +93,17 @@ export class FareFormComponent implements OnInit {
 
             fare.date = moment(fare.date).format('YYYYMMDD');
 
-            // Método que adiciona um novo gasto no ciclo
-            this.fareService.findById(this.novoId).subscribe(response => {
+            // Inserindo um novo gasto no ciclo. Ver .README
+            this.fareService.findById(this.idEx).subscribe(response => {
               const dados: Novo = response;
               dados.fare.push(fare);
-              this.fareService.update(this.novoId, dados).subscribe(resp => resolve(resp));
+              return this.fareService.update(this.idEx, dados).subscribe(resp => resolve(resp));
             });
 
             // if (this.isEditing()) {
-            //   this.fareService.update(this.fareId, fare).subscribe(res => resolve(res));
+            //   this.fareService.update(this.idIn, fare).subscribe(res => resolve(res));
             // } else {
-            //   this.fareService.create(this.novoId, this.fares).subscribe(res => resolve(res));
+            //   this.fareService.create(this.idEx, this.fares).subscribe(res => resolve(res));
             // }
           } else {
             resolve();

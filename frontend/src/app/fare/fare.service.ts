@@ -18,15 +18,25 @@ export class FareService {
     return this.http.get<Novo[]>(`${URL}`);
   }
 
+  // Função também usada para remover um novo gasto no array interno;
   findById(fareId: string): Observable<Novo> {
     return this.http.get<Novo>(`${URL}/${fareId}`);
   }
 
+  // Função também usada para inserir um novo gasto no array interno;
   update(fareId: string, gasto: Novo): Observable<Novo> {
-    console.log(gasto);
    return this.http.put<Novo>(`${URL}/${fareId}`, gasto);
   }
 
+  delete(fareId: string): Observable<any> {
+    return this.http.delete<any>(`${URL}/${fareId}`);
+  }
+
+  // Essa função cria apenas o ciclo (Mês/Ano);
+  create(gastoId: string, gasto: Fare[]): Observable<Novo> {
+    console.log(gasto);
+    return this.http.put<Novo>(`${URL}/${gastoId}`, gasto);
+  }
   /*
     Eu preciso criar os métodos de atualizar e deletar gasto .
   */
@@ -39,14 +49,9 @@ export class FareService {
     return this.http.get<Fare[]>(`${URL}`, {params});
   }
 
-  create(gastoId: string, gasto: Fare[]): Observable<Novo> {
-    console.log(gasto);
-    return this.http.put<Novo>(`${URL}/${gastoId}`, gasto);
-  }
 
-  delete(fareId: string): Observable<any> {
-    return this.http.delete<any>(`${URL}/${fareId}`);
-  }
+
+
 }
   // update(fareId: string, gasto: Fare): any {
   //   Object.keys(gasto).forEach(item => {

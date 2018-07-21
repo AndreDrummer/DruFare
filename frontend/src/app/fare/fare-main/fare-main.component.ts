@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Fare } from './../fare.model';
+import { Novo } from './../../novo/novo.model';
 import { Resume } from './resume/resume.model';
 import { NovoService } from './../../novo/novo.service';
 import { FareService } from './../fare.service';
@@ -18,7 +19,7 @@ export class FareMainComponent implements OnInit {
   mes: string;
   ano: string;
   title: string;
-  novoId: string;
+  idEx: string;
 
   cardValue = 0;
   moneyValue = 0;
@@ -55,7 +56,6 @@ export class FareMainComponent implements OnInit {
 ngOnInit() {
   this.mes = this.route.snapshot.queryParams.mes;
   this.ano = this.route.snapshot.queryParams.ano;
-  console.log(this.route.snapshot.queryParams);
   this.title = `${this.mes} de ${this.ano}`;
   this.startPage();
 }
@@ -64,7 +64,7 @@ ngOnInit() {
     this.novoService.find().subscribe(response => {
       response.filter(item => {
         if (item.mes === this.mes && item.ano === this.ano) {
-          this.novoId = item._id;
+          this.idEx = item._id;
           item.fare.forEach(spent => {
             if (spent.paymentForm === 'Cartão') {
               this.cardValue += spent.value;
@@ -79,9 +79,16 @@ ngOnInit() {
     });
   }
 
+// Removendo um gasto no ciclo. Ver .README
+// this.fareService.findById(this.idEx).subscribe(response => {
+//   const dados: Novo = response;
+//   this.remove(dados.fare, this.idIn);
+//   return this.fareService.update(this.idEx, dados).subscribe();
+// });
+
   Novo() {
     if (this.params()) {
-      this.router.navigate(['/form'] , { queryParams: {ano: this.ano, mes: this.mes, idNovo: this.novoId}});
+      this.router.navigate(['/form'] , { queryParams: {ano: this.ano, mes: this.mes, idEx: this.idEx}});
     } else {
       notify({
         width: '500',
@@ -107,11 +114,23 @@ ngOnInit() {
     this.fareService.update(event.data._id, event.data).subscribe();
   }
 
+  // Função que remove um gasto utilizando o método remove(array, id) e o findById(id) do service;
   delete(event): void {
-    const dados = event.data;
-    const ano = dados.ano;
-    const mes = dados.mes;
-    // this.novoService.delete(ano, mes);
-    this.fareService.delete(event.data._id).subscribe();
+    const id = event.data._id;
+    this.fareService.findById(this.idEx).subscribe(response => {
+    const dado: Novo = response;
+    this.remove(dado.fare, id);
+    this.fareService.update(this.idEx, dado).subscribe();
+    });
+  }
+
+  // Função que remove o elemento do array;
+  remove (array, idIn) {
+    array.forEach((item, index) => {
+        const dado = item._id === idIn;
+        if (dado) {
+          array.splice(index, 1);
+        }
+    });
   }
 }
