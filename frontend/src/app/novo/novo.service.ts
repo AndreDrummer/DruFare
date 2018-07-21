@@ -20,8 +20,20 @@ export class NovoService {
       return this.http.get<Novo[]>(`${URL}`, {params});
     }
 
-    find(mes?: string, ano?: string): Observable<Novo[]> {
+    find(): Observable<Novo[]> {
       return this.http.get<Novo[]>(`${URL}`);
+    }
+
+    findFares(fares: string): Observable<Novo[]> {
+      let params: HttpParams;
+      params = new HttpParams().append('spents', fares);
+      return this.http.get<Novo[]>(`${URL}`, {params});
+    }
+
+    findPay(payment: string): Observable<Novo[]> {
+      let params: HttpParams;
+      params = new HttpParams().append('paymentForm', payment);
+      return this.http.get<Novo[]>(`${URL}`, {params});
     }
 
     findById(novoId: string): Observable<Novo> {
@@ -29,6 +41,7 @@ export class NovoService {
     }
 
     create(novo: Novo): Observable<Novo> {
+      console.log(novo);
       return this.http.post<Novo>(`${URL}`, novo);
     }
 

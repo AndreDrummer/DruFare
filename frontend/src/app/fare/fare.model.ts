@@ -3,6 +3,4 @@ export class Fare {
   date: Date;
   value: number;
   paymentForm: string;
-  ano: string;
-  mes: string;
 }

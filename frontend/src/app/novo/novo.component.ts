@@ -41,6 +41,11 @@ export class NovoComponent implements OnInit, OnChanges {
     console.log(`ngOnChanges - data is ${this.existe}`);
   }
 
+
+  testeNovo() {
+    this.novoService.find().subscribe(res => console.log(res));
+  }
+
   // Função que verifica se ciclo já foi criado!
   verify() {
     if (this.novoForm.valid) {
@@ -65,6 +70,15 @@ export class NovoComponent implements OnInit, OnChanges {
             } else {
           }
       });
+    } else {
+      notify({
+        width: '300',
+        message: 'Você deve preencher todos os campos!',
+        position: {
+          my: 'center center',
+          at: 'center center'
+        }
+      }, 'error', 3000);
     }
   }
 
@@ -95,15 +109,6 @@ export class NovoComponent implements OnInit, OnChanges {
           }
         });
       });
-    } else {
-      notify({
-        width: '300',
-        message: 'Você deve preencher todos os campos!',
-        position: {
-          my: 'center center',
-          at: 'center center'
-        }
-      }, 'error', 3000);
     }
   }
 }

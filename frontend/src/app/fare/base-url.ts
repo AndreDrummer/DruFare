@@ -1,3 +1,3 @@
-export const URL = 'http://localhost:3003/api/spents';
+export const URL = 'http://localhost:3003/api/cycles';
 
 

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FareService } from './../fare.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import * as moment from 'moment';
 import swal from 'sweetalert';
 import notify from 'devextreme/ui/notify';
+
+import { FareService } from './../fare.service';
+import { Novo } from './../../novo/novo.model';
 
 @Component({
   selector: 'app-fare-form',
@@ -16,15 +18,23 @@ export class FareFormComponent implements OnInit {
 
   gastos: any;
   _fareId: string;
+  _novoId: string;
   fareForm: FormGroup;
   ano: string;
   mes: string;
+  resposta: Novo;
 
   get fareId(): string {
     if (!this._fareId) {
       this._fareId = this.route.snapshot.queryParams.id;
     }
     return this._fareId;
+  }
+  get novoId(): string {
+    if (!this._novoId) {
+      this._novoId = this.route.snapshot.queryParams.idNovo;
+    }
+    return this._novoId;
   }
 
   private isEditing(): boolean {
@@ -49,13 +59,13 @@ export class FareFormComponent implements OnInit {
       paymentForm: this.fb.control('', [Validators.required])
     });
 
-    if (this.isEditing()) {
-      this.fareService.findById(this.fareId).subscribe(response => {
-        console.log(response);
-      this.fareForm.patchValue(response);
-      this.fareForm.patchValue({date:  moment(response.date, 'YYYYMMDD')});
-      });
-    }
+    // if (this.isEditing()) {
+    //   this.fareService.findById(this.fareId).subscribe(response => {
+    //     console.log(response);
+    //   this.fareForm.patchValue(response);
+    //   this.fareForm.patchValue({date:  moment(response., 'YYYYMMDD')});
+    //   });
+    // }
   }
 
   onRegister() {
@@ -71,19 +81,22 @@ export class FareFormComponent implements OnInit {
       }).then(willSave => {
         return new Promise(resolve => {
           if (willSave) {
-
             const fare = this.fareForm.value;
 
-            fare.ano = this.ano;
-            fare.mes = this.mes;
             fare.date = moment(fare.date).format('YYYYMMDD');
 
-            if (this.isEditing()) {
-              console.log(fare);
-              this.fareService.update(this.fareId, fare).subscribe(res => resolve(res));
-            } else {
-              this.fareService.create(fare).subscribe(res => resolve(res));
-            }
+            // Método que adiciona um novo gasto no ciclo
+            this.fareService.findById(this.novoId).subscribe(response => {
+              const dados: Novo = response;
+              dados.fare.push(fare);
+              this.fareService.update(this.novoId, dados).subscribe(resp => resolve(resp));
+            });
+
+            // if (this.isEditing()) {
+            //   this.fareService.update(this.fareId, fare).subscribe(res => resolve(res));
+            // } else {
+            //   this.fareService.create(this.novoId, this.fares).subscribe(res => resolve(res));
+            // }
           } else {
             resolve();
           }

@@ -14,6 +14,23 @@ export class FareService {
 
   constructor(private http: HttpClient) { }
 
+  find(): Observable<Novo[]> {
+    return this.http.get<Novo[]>(`${URL}`);
+  }
+
+  findById(fareId: string): Observable<Novo> {
+    return this.http.get<Novo>(`${URL}/${fareId}`);
+  }
+
+  update(fareId: string, gasto: Novo): Observable<Novo> {
+    console.log(gasto);
+   return this.http.put<Novo>(`${URL}/${fareId}`, gasto);
+  }
+
+  /*
+    Eu preciso criar os métodos de atualizar e deletar gasto .
+  */
+
   findPay(payment?: string): Observable<Fare[]> {
     let params: HttpParams;
     if (payment) {
@@ -22,24 +39,9 @@ export class FareService {
     return this.http.get<Fare[]>(`${URL}`, {params});
   }
 
-  find(payment?: string): Observable<Fare[]> {
-    let params: HttpParams;
-    if (payment) {
-      params = new HttpParams().append('paymentForm', payment);
-    }
-    return this.http.get<Fare[]>(`${URL}`, {params});
-  }
-
-  findById(fareId: string): Observable<Fare> {
-    return this.http.get<Fare>(`${URL}/${fareId}`);
-  }
-
-  create(gasto: Fare): Observable<Fare> {
-    return this.http.post<Fare>(`${URL}`, gasto);
-  }
-
-  update(fareId: string, gasto: Fare): Observable<Fare> {
-   return this.http.put<Fare>(`${URL}/${fareId}`, gasto);
+  create(gastoId: string, gasto: Fare[]): Observable<Novo> {
+    console.log(gasto);
+    return this.http.put<Novo>(`${URL}/${gastoId}`, gasto);
   }
 
   delete(fareId: string): Observable<any> {

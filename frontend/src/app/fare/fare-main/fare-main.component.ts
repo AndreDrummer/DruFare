@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Fare } from './../fare.model';
@@ -18,6 +18,7 @@ export class FareMainComponent implements OnInit {
   mes: string;
   ano: string;
   title: string;
+  novoId: string;
 
   cardValue = 0;
   moneyValue = 0;
@@ -51,21 +52,28 @@ export class FareMainComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-    this.mes = this.route.snapshot.queryParams.mes;
-    this.ano = this.route.snapshot.queryParams.ano;
-    this.title = `${this.mes} de ${this.ano}`;
+ngOnInit() {
+  this.mes = this.route.snapshot.queryParams.mes;
+  this.ano = this.route.snapshot.queryParams.ano;
+  console.log(this.route.snapshot.queryParams);
+  this.title = `${this.mes} de ${this.ano}`;
+  this.startPage();
+}
 
-      this.fareService.find().subscribe(response => {
-        response.filter(item => {
+  startPage() {
+    this.novoService.find().subscribe(response => {
+      response.filter(item => {
         if (item.mes === this.mes && item.ano === this.ano) {
-          if (item.paymentForm === 'Cartão') {
-            this.cardValue += item.value;
-          } else if (item.paymentForm === 'Dinheiro') {
-            this.moneyValue += item.value;
-          }
-          this.totalValue += item.value;
-          this.gastos = response;
+          this.novoId = item._id;
+          item.fare.forEach(spent => {
+            if (spent.paymentForm === 'Cartão') {
+              this.cardValue += spent.value;
+            } else if (spent.paymentForm === 'Dinheiro') {
+              this.moneyValue += spent.value;
+            }
+            this.totalValue += spent.value;
+            this.gastos = item.fare;
+          });
         }
       });
     });
@@ -73,7 +81,7 @@ export class FareMainComponent implements OnInit {
 
   Novo() {
     if (this.params()) {
-      this.router.navigate(['/form'] , { queryParams: {ano: this.ano, mes: this.mes}});
+      this.router.navigate(['/form'] , { queryParams: {ano: this.ano, mes: this.mes, idNovo: this.novoId}});
     } else {
       notify({
         width: '500',
@@ -91,7 +99,7 @@ export class FareMainComponent implements OnInit {
   }
 
   create(event): void {
-    this.fareService.create(event.data).subscribe();
+    this.fareService.create(event.data._id, event.data).subscribe();
   }
 
   update(event): void {
