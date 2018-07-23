@@ -93,3 +93,15 @@
   background-color:  rgb(2, 192, 81);
 }
 
+.search {
+  top: 8px;
+}
+
+.search p{
+  font-size: 13px;
+  font-family: 'Times New Roman', Times, serif;
+  text-decoration: darkgray;
+  text-decoration: inherit;
+
+}
+

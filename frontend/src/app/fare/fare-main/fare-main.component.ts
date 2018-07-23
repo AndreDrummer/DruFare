@@ -1,25 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { NovoComponent } from './../../novo/novo.component';
+
 import { Fare } from './../fare.model';
 import { Novo } from './../../novo/novo.model';
 import { Resume } from './resume/resume.model';
+
 import { NovoService } from './../../novo/novo.service';
 import { FareService } from './../fare.service';
+
 import * as moment from 'moment';
 import notify from 'devextreme/ui/notify';
+import { month, year } from 'src/assets/arrays/datasource';
 
 @Component({
   selector: 'app-fare',
   templateUrl: './fare-main.component.html'
 })
 export class FareMainComponent implements OnInit {
-
   gastos: Fare[];
+
+
   mes: string;
   ano: string;
+
   title: string;
   idEx: string;
+
+  mesSearch = month;
+  anoSearch = year;
 
   cardValue = 0;
   moneyValue = 0;
@@ -46,19 +56,19 @@ export class FareMainComponent implements OnInit {
     return mes && ano ? true : false;
   }
 
-  constructor (
+  constructor(
     private fareService: FareService,
     private novoService: NovoService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
-ngOnInit() {
-  this.mes = this.route.snapshot.queryParams.mes;
-  this.ano = this.route.snapshot.queryParams.ano;
-  this.title = `${this.mes} de ${this.ano}`;
-  this.startPage();
-}
+  ngOnInit() {
+    this.mes = this.route.snapshot.queryParams.mes;
+    this.ano = this.route.snapshot.queryParams.ano;
+    this.title = `${this.mes} de ${this.ano}`;
+    this.startPage();
+  }
 
   startPage() {
     this.novoService.find().subscribe(response => {
@@ -79,30 +89,57 @@ ngOnInit() {
     });
   }
 
-// Removendo um gasto no ciclo. Ver .README
-// this.fareService.findById(this.idEx).subscribe(response => {
-//   const dados: Novo = response;
-//   this.remove(dados.fare, this.idIn);
-//   return this.fareService.update(this.idEx, dados).subscribe();
-// });
+  // search(ano, mes) {
+  //   if (ano && mes) {
+  //     this.novoService.findOne(mes, ano).subscribe(res => {
+  //       if (res.length === 0) {
+  //         this.novo.newCycle();
+  //       } else if (res.length > 0) {
+  //         this.router.navigate(['/fares'], { queryParams: { ano, mes } });
+  //       }
+  //     });
+  //   } else {
+  //     notify(
+  //       {
+  //         width: '300',
+  //         message: 'Escolha ano e o mês do ciclo!',
+  //         position: {
+  //           my: 'center center',
+  //           at: 'center center'
+  //         }
+  //       },
+  //       'error',
+  //       3000
+  //     );
+  //   }
+  // }
 
   Novo() {
     if (this.params()) {
-      this.router.navigate(['/form'] , { queryParams: {ano: this.ano, mes: this.mes, idEx: this.idEx}});
+      this.router.navigate(['/form'], {
+        queryParams: { ano: this.ano, mes: this.mes, idEx: this.idEx }
+      });
     } else {
-      notify({
-        width: '500',
-        message: 'Você deve voltar à Página Inicial e começar um ciclo para registrar seus gastos!',
-        position: {
-          my: 'center center',
-          at: 'center center'
-        }
-      }, 'error', 7000);
+      notify(
+        {
+          width: '500',
+          message:
+            'Você deve voltar à Página Inicial e começar um ciclo para registrar seus gastos!',
+          position: {
+            my: 'center center',
+            at: 'center center'
+          }
+        },
+        'error',
+        7000
+      );
     }
-   }
+  }
 
   dateFormat(dateNumber: number): String {
-    return moment(dateNumber, 'YYYYMMDD').locale('pt-br').format('L');
+    return moment(dateNumber, 'YYYYMMDD')
+      .locale('pt-br')
+      .format('L');
   }
 
   create(event): void {
@@ -118,19 +155,9 @@ ngOnInit() {
   delete(event): void {
     const id = event.data._id;
     this.fareService.findById(this.idEx).subscribe(response => {
-    const dado: Novo = response;
-    this.remove(dado.fare, id);
-    this.fareService.update(this.idEx, dado).subscribe();
-    });
-  }
-
-  // Função que remove o elemento do array;
-  remove (array, idIn) {
-    array.forEach((item, index) => {
-        const dado = item._id === idIn;
-        if (dado) {
-          array.splice(index, 1);
-        }
+      const dado: Novo = response;
+      this.fareService.remove(dado.fare, id);
+      this.fareService.update(this.idEx, dado).subscribe();
     });
   }
 }

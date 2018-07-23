@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -10,6 +9,7 @@ import notify from 'devextreme/ui/notify';
 
 import { FareService } from './../fare.service';
 import { Novo } from './../../novo/novo.model';
+import { Fare } from './../fare.model';
 
 @Component({
   selector: 'app-fare-form',
@@ -64,6 +64,8 @@ export class FareFormComponent implements OnInit {
 
     if (this.isEditing()) {
       this.fareService.findById(this.idEx).subscribe(response => {
+        this.ano = response.ano;
+        this.mes = response.mes;
         const fares = response.fare;
         fares.forEach(item => {
           const dado = item._id;
@@ -93,23 +95,32 @@ export class FareFormComponent implements OnInit {
 
             fare.date = moment(fare.date).format('YYYYMMDD');
 
-            // Inserindo um novo gasto no ciclo. Ver .README
-            this.fareService.findById(this.idEx).subscribe(response => {
+            if (this.isEditing()) {
+              // Atualizando um gasto no ciclo. Ver .README
+              this.fareService.findById(this.idEx).subscribe(response => {
+                const dados: Novo = response;
+                dados.fare.forEach((item, index) => {
+                  if (item._id === this.idIn) {
+                    Object.keys(fare).forEach(gasto => {
+                      dados.fare[index][gasto] = fare[gasto];
+                    });
+                  }
+                });
+                return this.fareService.update(this.idEx, dados).subscribe(resp => resolve(resp));
+              });
+            } else {
+              // Inserindo um novo gasto no ciclo. Ver .README
+              this.fareService.findById(this.idEx).subscribe(response => {
               const dados: Novo = response;
               dados.fare.push(fare);
               return this.fareService.update(this.idEx, dados).subscribe(resp => resolve(resp));
-            });
-
-            // if (this.isEditing()) {
-            //   this.fareService.update(this.idIn, fare).subscribe(res => resolve(res));
-            // } else {
-            //   this.fareService.create(this.idEx, this.fares).subscribe(res => resolve(res));
-            // }
+              });
+            }
           } else {
             resolve();
           }
         });
-        }).then((fare: any) => {
+        }).then((fare: Fare) => {
           if (fare) {
             this.router.navigate(['/fares'], { queryParams: {ano: this.ano, mes: this.mes}});
             swal(`Gasto ${this.isEditing() ? 'atualizado' : 'registrado'} com sucesso!`, {icon: 'success'});

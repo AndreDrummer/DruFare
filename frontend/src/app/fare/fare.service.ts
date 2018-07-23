@@ -14,10 +14,6 @@ export class FareService {
 
   constructor(private http: HttpClient) { }
 
-  find(): Observable<Novo[]> {
-    return this.http.get<Novo[]>(`${URL}`);
-  }
-
   // Função também usada para remover um novo gasto no array interno;
   findById(fareId: string): Observable<Novo> {
     return this.http.get<Novo>(`${URL}/${fareId}`);
@@ -28,6 +24,12 @@ export class FareService {
    return this.http.put<Novo>(`${URL}/${fareId}`, gasto);
   }
 
+    // Esse método traz todos os ciclos!
+    find(): Observable<Novo[]> {
+      return this.http.get<Novo[]>(`${URL}`);
+    }
+
+  // Esse método deleta apenas o ciclo!
   delete(fareId: string): Observable<any> {
     return this.http.delete<any>(`${URL}/${fareId}`);
   }
@@ -38,8 +40,18 @@ export class FareService {
     return this.http.put<Novo>(`${URL}/${gastoId}`, gasto);
   }
   /*
-    Eu preciso criar os métodos de atualizar e deletar gasto .
+    Eu preciso criar os métodos de atualizar.
   */
+
+    // Função que remove o elemento do array;
+  remove (array, idIn) {
+    array.forEach((item, index) => {
+        const dado = item._id === idIn;
+        if (dado) {
+          array.splice(index, 1);
+        }
+    });
+  }
 
   findPay(payment?: string): Observable<Fare[]> {
     let params: HttpParams;
@@ -48,14 +60,11 @@ export class FareService {
     }
     return this.http.get<Fare[]>(`${URL}`, {params});
   }
-
-
-
-
 }
-  // update(fareId: string, gasto: Fare): any {
-  //   Object.keys(gasto).forEach(item => {
-  //     this.gastos[0][item] = gasto[item];
-  //   });
-  //   return this.gastos[0];
-  // }
+
+// atualizar(fareId: string, gasto: Fare): any {
+//   Object.keys(gasto).forEach(item => {
+//     this.gastos[0][item] = gasto[item];
+//   });
+//   return this.gastos[0];
+// }
