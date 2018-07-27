@@ -29,12 +29,12 @@ import { DxValidationSummaryModule } from 'devextreme-angular/ui/validation-summ
     DxButtonModule,
     DxValidatorModule,
     DxValidationSummaryModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule    
   ],
   declarations: [
     FareFormComponent,
     FareMainComponent,
-    ResumeComponent
+    ResumeComponent,
   ],
   exports: [
     FareFormComponent,

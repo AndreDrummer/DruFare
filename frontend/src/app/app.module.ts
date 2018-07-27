@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { BotaoPlusComponent } from './components/botao/botao.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { HomeComponent } from './home/home.component';
 import { FareModule } from './fare/fare.module';
 import { NovoModule } from './novo/novo.module';
+import { HomeModule } from './home/home.module';
 
 import { ROUTES } from './app.routes';
 
@@ -23,12 +24,13 @@ locale('pt-BR');
     AppComponent,
     HeaderComponent,
     SidebarComponent,
-    HomeComponent
+    BotaoPlusComponent
 ],
   imports: [
     BrowserModule,
     RouterModule,
     FareModule,
+    HomeModule,
     NovoModule,
     RouterModule.forRoot(ROUTES)
   ],

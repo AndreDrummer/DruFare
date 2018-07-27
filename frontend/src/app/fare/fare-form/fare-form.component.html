@@ -51,7 +51,7 @@
                 </dx-select-box>
               </div>
             </div>
-            <dx-button [useSubmitBehavior]="true" type="success" text="Registrar" (click)="onRegister()"></dx-button>
+            <dx-button [disabled]="!fareForm.valid" [useSubmitBehavior]="true" type="success" text="Registrar" (click)="onRegister()"></dx-button>
           </div>
           <dx-validation-summary id="summary"></dx-validation-summary>
         </form>

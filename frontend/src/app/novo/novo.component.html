@@ -31,7 +31,7 @@
             </div>
             <dx-validation-summary id="summary"></dx-validation-summary>
           </div>
-          <dx-button type="success" text="Iniciar" (click)="verify()"></dx-button>
+          <dx-button [disabled]="!novoForm.valid" type="success" text="Iniciar" (click)="verify()"></dx-button>
         </form>
       </div>
     </div>

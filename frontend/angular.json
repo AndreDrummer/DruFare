@@ -34,6 +34,9 @@
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/admin-lte/dist/js/adminlte.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/moment/moment.js",              
+              "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
+              "./node_modules/web-animations-js/web-animations.min.js",
               "./node_modules/fastclick/lib/fastclick.js"
             ]
           },

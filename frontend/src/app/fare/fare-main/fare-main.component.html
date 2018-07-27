@@ -1,10 +1,12 @@
 <section class="content-header">
-  <p *ngIf="!params()">
-  Este(s) registro(s) não faz
-  parte de nehum ciclo.
-  Vá para <a href="#">Página Inicial</a>
-  e comece um novo ciclo!`
-  </p>
+  <div class="col-md-12 col-sm-8 col-xs-12">
+    <p *ngIf="!params()">
+      Este(s) registro(s) não faz
+      parte de nehum ciclo.
+      Vá para <a href="#">Página Inicial</a>
+      e comece um novo ciclo!`
+      </p>
+  </div>
 <h1 *ngIf="params()">{{title}}</h1>
 </section>
 
@@ -17,20 +19,23 @@
     </div>
     <div class="col-md-8 col-sm-6 col-xs-10">
       <!--Barra de Pesquisa-->
-      <div class="col-md-2 col-xs-2 pull-right">
-        <button class="btn btn-sm btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
-      </div>
-      <div class="col-md-2 col-xs-4 pull-right">
-        <dx-select-box placeholder="Mês" [dataSource]="mesSearch"></dx-select-box>
-      </div>
-      <div class="col-md-2 col-xs-4 pull-right">
-        <dx-select-box placeholder="Ano" [dataSource]="anoSearch"></dx-select-box>
-      </div>
+      <form [formGroup]="searchForm">
+        <div class="col-md-2 col-xs-2 pull-right">
+          <button type="submit" [disabled]="!searchForm.valid" class="btn btn-sm btn-default" (click)="search()" ><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-md-2 col-xs-4 pull-right">
+          <dx-select-box formControlName='mes' [placeholder]="mesU" [dataSource]="mesSearch"></dx-select-box>
+        </div>
+        <div class="col-md-2 col-xs-4 pull-right">
+          <dx-select-box formControlName='ano' [placeholder]="anoU" [dataSource]="anoSearch"></dx-select-box>
+        </div>
+      </form>
       <!--Fim barra de pesquisa-->
     </div>
 
     <!--Botão Add-->
-      <button mat-raised-button mat-min-fab class="addRight btn btn-success btn-round btn-fab pull-right fa fa-plus" title="Novo Gasto" (click)="Novo()"></button>
+    <app-botao-plus></app-botao-plus>
+      <!-- <button mat-raised-button mat-min-fab class="addRight btn btn-success btn-round btn-fab pull-right fa fa-plus" title="Novo Gasto" (click)="NovoGasto()"></button> -->
     <!--Fim do botão Add-->
   </div>
 </div>

@@ -1,49 +1,46 @@
-<!-- <section class="content-header">
+<section class="content-header">
+  <h1>Gastos</h1>
+  <div class="row">
+    <div class="col-md-11">          
+        <button [routerLink]="['/novo']" title="Iniciar Novo Ciclo" type="button" class="bmd-btn-fab plusHome pull-right">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+  </div>
 </section>
 
-<section class="content">
-
-  <div class="home welcome-home">
-    <h1>Seja muito bem vindo!</h1>
-    <p>
-      Este é o <strong><em>DruFare</em></strong>, <br />o seu gerenciador de gastos pessoais.
-    </p>
-    <a class="btn btn-success btn-sm" [routerLink]="['/fares']">Começar</a>
+<div *ngIf="gastos.length === 0" class="col-md-5 col-sm-8 col-xs-12">
+  <div class="callout callout-warning">  
+    <h4>{{title}}</h4>
+    <p>Para registrar um novo clique em &nbsp;<i class="fa fa-plus"></i></p>
   </div>
-</section> -->
-<div class="row">
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">{{title}}</h4>
-        </div>
-      </div>
+
+  <div class="col-md-7 col-sm-7 col-xs-6">          
+      <button [routerLink]="['/novo']" title="Iniciar Novo Ciclo" type="button" class="addRight bmd-btn-fab plusHome pull-right">
+        <i class="fa fa-plus"></i>
+      </button>
   </div>
 </div>
 
-    <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="row">
-            <button [routerLink]="['/novo']" title="Iniciar Novo Ciclo" type="button" class="bmd-btn-fab plusHome pull-right">
-              <i class="fa fa-plus"></i>
-            </button>
+<section class="content">  
+
+  <div class="row">
+    <div class="col-md-11 col-sm-8 col-xs-12">      
+      <div class="row">
+        <div *ngFor="let item of gastos" class="col-md-4 col-sm-8 col-xs-12">
+          <app-gastos [dashboard]="item"></app-gastos>
         </div>
       </div>
     </div>
 
+  </div>
+</section>
 
-<!-- <section class="content-header">
-  </section>
-
-  <section class="content">
-
-    <div class="home welcome-home">
-       <h1>Bem vindo ao Meat!</h1>
-       <p>
-         Está com fome? Peça e receba em casa.
-       </p>
-       <a class="btn btn-primary btn-lg" [routerLink]="['/restaurants']">Ver Restaurantes</a>
+<!-- <div *ngFor="let item of resumes" class="col-md-4 col-sm-8 col-xs-12">
+    <div *ngIf="item.name === 'Cartão'">
+        <app-resume [resume]="item" [value]="cardValue.toFixed(2).replace('.', ',')"></app-resume>
     </div>
-
-  </section>
- -->
+    <div *ngIf="item.name === 'Dinheiro'">
+        <app-resume [resume]="item" [value]="moneyValue.toFixed(2).replace('.', ',')"></app-resume>
+    </div>
+  </div> -->

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { month, year } from 'src/assets/arrays/datasource';
 import { NovoService } from './novo.service';
@@ -25,7 +25,6 @@ export class NovoComponent implements OnInit, OnChanges {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private novoService: NovoService
   ) { }
@@ -55,7 +54,7 @@ export class NovoComponent implements OnInit, OnChanges {
 
       this.novoService.findOne(this.mes, this.ano).subscribe(res => {
           if (res.length === 0) {
-            this.newCycle();
+            this.novoService.newCycle(this.novoForm);
           } else if (res.length > 0) {
               swal({
                 title: 'Você Já cadastrou isso!',
@@ -79,36 +78,6 @@ export class NovoComponent implements OnInit, OnChanges {
           at: 'center center'
         }
       }, 'error', 3000);
-    }
-  }
-
-  // Função que inicia novo ciclo caso não tenha um igual
-  newCycle() {
-    if (this.novoForm.valid) {
-      swal({
-        title: 'Iniciar Novo Ciclo de Gastos?',
-        buttons: {
-          cancel: { text: 'Calma ae.', visible: true },
-          confirm: { text: 'Iniciar'}    },
-        dangerMode: true
-      }).then(willSave => {
-        return new Promise (resolve => {
-          if (willSave) {
-            const form = this.novoForm.value;
-            this.ano = form.ano;
-            this.mes = form.mes;
-
-            this.novoService.create(form).subscribe(res => resolve(res));
-          } else {
-            resolve();
-          }
-        }).then((novo: any) => {
-          if (novo) {
-            this.router.navigate(['/fares'], { queryParams: {ano: this.ano, mes: this.mes}});
-            swal('Ciclo Iniciado!', {icon: 'success'});
-          }
-        });
-      });
     }
   }
 }

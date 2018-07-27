@@ -11,7 +11,8 @@ const spentsSchema = new mongoose.Schema({
 
 const cyclesSchema = new mongoose.Schema({
   mes: { type: String, required: [true, 'É obrigatório Informar o mês'] },
-  ano: { type: String, min: 19101201, max: 21001201, required: [true, 'É obrigatório Informar o ano'] },
+  ano: { type: String, min: 19101201, max: 21001201, required: [true, 'É obrigatório Informar o ano'] },  
+  nome: { type: String, required: true },
   fare: [spentsSchema]
 });
 
