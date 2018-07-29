@@ -1,15 +1,15 @@
 <div class="row">
     <div class="col-md-12 col-sm-6 col-xs-12">
         <div class="info-box">
-            <span class="info-box-icon bg-green">
+            <span class="info-box-icon bg-{{dashboard.color}}">
                 <i class="fa fa-dollar"></i>
             </span>
             <div class="info-box-content">
                 <span class="info-box-text">
                     <i class="fa fa-calendar"></i> {{dashboard.nome}}
                 </span>
-                <!-- <small class="info-box-number">R$ {{dashboard.total.toFixed(2).replace('.', ',')}}</small> -->
-                <a class="pull-right btn btn-primary btn-sm buttonDetail" title="Ir para o gasto" (click)="spentDetail()">
+                <small style="margin-top: 13px;" class="info-box-number">R$ {{dashboard.total.toFixed(2).replace('.', ',')}}</small>
+                <a style="margin-top: 0px;" class="pull-right btn btn-primary btn-sm buttonDetail" title="Ir para o gasto" (click)="spentDetail()">
                     <i class="fa fa-arrow-right"></i>
                 </a>        
             </div>

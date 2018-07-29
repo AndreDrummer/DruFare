@@ -12,7 +12,6 @@ export class DashboardComponent {
   mes: string;
 
   @Input() dashboard: Dashboard;
-  @Input() total: number;
 
   constructor(private router: Router) { }
 
@@ -20,5 +19,5 @@ export class DashboardComponent {
     this.ano = this.dashboard.ano;
     this.mes = this.dashboard.mes;
     this.router.navigate(['/fares'], {queryParams: {ano: this.ano, mes: this.mes}})
-  }
+  }  
 }

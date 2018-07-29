@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { NovoRoutingModule } from './novo.routing';
+import { ComponentsModule } from 'src/app/components/components.module'
 import { DxSelectBoxModule } from 'devextreme-angular/ui/select-box';
 import { DxButtonModule } from 'devextreme-angular';
 import { DxValidationSummaryModule } from 'devextreme-angular/ui/validation-summary';
@@ -17,7 +18,8 @@ import { DxValidatorModule } from 'devextreme-angular/ui/validator';
     DxSelectBoxModule,
     DxButtonModule,
     DxValidationSummaryModule,
-    DxValidatorModule
+    DxValidatorModule,
+    ComponentsModule
   ],
   exports: [
     NovoComponent

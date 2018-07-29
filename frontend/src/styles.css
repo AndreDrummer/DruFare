@@ -6,15 +6,11 @@
  @import '../node_modules/font-awesome/css/font-awesome.css';
  @import '../node_modules/material-icons/css/material-icons.css'; 
 
-/* @import 'C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/admin-lte/dist/css/adminlte.css';
-@import 'C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/admin-lte/dist/css/adminlte.min.css';
-@import "C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import "C:/Users/Andre Felipe Drumer/Desktop/Admin/admin/node_modules/font-awesome/css/font-awesome.css";
- */
+ @import '/home/andre/Área de Trabalho/Projeto/DruFare/frontend/node_modules/perfect-scrollbar/css/perfect-scrollbar.css';
+ @import '/home/andre/Área de Trabalho/Projeto/DruFare/frontend/node_modules/animate.css/animate.min.css';
 
 @import "../node_modules/devextreme/dist/css/dx.common.css";
 @import "../node_modules/devextreme/dist/css/dx.light.compact.css";
-@import "../node_modules/animate.css/animate.min.css";
 
  .home {
   display: block;

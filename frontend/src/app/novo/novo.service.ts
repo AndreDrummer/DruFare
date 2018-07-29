@@ -13,7 +13,7 @@ export class NovoService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-    findOne(mes: string, ano: string): Observable<Novo[]> {
+    findOne(mes?: string, ano?: string): Observable<Novo[]> {
       let params: HttpParams;
       if (mes !== undefined && ano !== undefined ) {        
         params = new HttpParams().append('mes', mes).append('ano', ano);
@@ -23,18 +23,6 @@ export class NovoService {
 
     find(): Observable<Novo[]> {
       return this.http.get<Novo[]>(`${URL}`);
-    }
-
-    findFares(fares: string): Observable<Novo[]> {
-      let params: HttpParams;
-      params = new HttpParams().append('spents', fares);
-      return this.http.get<Novo[]>(`${URL}`, {params});
-    }
-
-    findPay(payment: string): Observable<Novo[]> {
-      let params: HttpParams;
-      params = new HttpParams().append('paymentForm', payment);
-      return this.http.get<Novo[]>(`${URL}`, {params});
     }
 
     findById(novoId: string): Observable<Novo> {

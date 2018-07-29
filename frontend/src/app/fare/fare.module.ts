@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FareMainComponent } from './fare-main/fare-main.component';
 import { FareFormComponent } from './fare-form/fare-form.component';
 import { FareRoutingModule } from './fare.routing.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { ResumeComponent } from './fare-main/resume/resume.component';
 
 // Devextreme Import
@@ -29,7 +30,8 @@ import { DxValidationSummaryModule } from 'devextreme-angular/ui/validation-summ
     DxButtonModule,
     DxValidatorModule,
     DxValidationSummaryModule,
-    ReactiveFormsModule    
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   declarations: [
     FareFormComponent,

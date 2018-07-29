@@ -4,4 +4,7 @@ import { Component } from '@angular/core';
     selector: 'app-botao-plus',
     templateUrl: './botao.component.html'
 })
-export class BotaoPlusComponent { }
+export class BotaoPlusComponent { 
+
+    constructor() { }
+}

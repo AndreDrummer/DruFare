@@ -6,8 +6,6 @@ import { Fare } from './../fare.model';
 import { Novo } from './../../novo/novo.model';
 import { Resume } from './resume/resume.model';
 
-import { BotaoPlusComponent } from 'src/app/components/botao/botao.component';
-
 import { NovoService } from './../../novo/novo.service';
 import { FareService } from './../fare.service';
 

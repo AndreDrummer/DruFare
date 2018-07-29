@@ -20,14 +20,29 @@ export class HomeComponent implements OnInit {
     this.startPage();
   }
 
-  startPage() {
-    this.novoService.find().subscribe(res => {
-      if (res.length > 0) {
-        res.forEach(item => {
+  startPage() {    
+    this.novoService.find().subscribe(res => {    
+      if (res.length > 0) {        
+        res.forEach((item, index) => {
+        let sum = 0;
+        let color = '';
+        item.fare.forEach(spent => {
+          sum += spent.value;          
+        })
+        if ((index) % 2 === 0) {          
+          color = 'yellow'
+        } else if ((index) % 3 === 0){          
+          color = 'red'
+        } else {          
+          color = 'green'
+        }
+        console.log(color);
           const obj = {
             nome: item.nome,
             mes: item.mes,
-            ano: item.ano            
+            ano: item.ano,
+            total: sum,
+            color: color   
           }
           this.gastos.push(obj);
         })
