@@ -23,6 +23,7 @@ export class FareFormComponent implements OnInit {
   ano: string;
   mes: string;
   _idIn: string;
+  textButton: string;
 
   // idEx é o id do elemento Mes/Ano o id Externo;
   get idEx(): string {
@@ -63,6 +64,7 @@ export class FareFormComponent implements OnInit {
     });
 
     if (this.isEditing()) {
+      this.textButton = 'Atualizar'
       this.fareService.findById(this.idEx).subscribe(response => {
         this.ano = response.ano;
         this.mes = response.mes;

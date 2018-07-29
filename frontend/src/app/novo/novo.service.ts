@@ -58,7 +58,7 @@ export class NovoService {
       return new Promise (resolve => {
         if (willSave) {
           form.nome = mes+' de '+ano;
-          this.create(form).subscribe(res => resolve(res));
+          this.create(form).subscribe(res => resolve(res));          
         } else {
           resolve();
         }
@@ -71,3 +71,5 @@ export class NovoService {
     });    
   }
 }
+
+

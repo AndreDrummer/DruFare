@@ -1,5 +1,5 @@
 <section class="content-header">
-  <h1>Gastos</h1>
+  <h1>Gastos de {{ano}}</h1>
   <div class="row">
     <app-botao-plus [routerLink]="['/novo']"></app-botao-plus>
   </div>
@@ -15,7 +15,7 @@
 <section class="content">  
 
   <div class="row">
-    <div class="col-md-11 col-sm-8 col-xs-12">      
+    <div class="col-md-12 col-sm-8 col-xs-12">      
       <div class="row">
         <div *ngFor="let item of gastos" class="col-md-4 col-sm-8 col-xs-12">
           <app-gastos [dashboard]="item"></app-gastos>

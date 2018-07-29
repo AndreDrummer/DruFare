@@ -39,10 +39,6 @@ export class FareService {
     console.log(gasto);
     return this.http.put<Novo>(`${URL}/${gastoId}`, gasto);
   }
-  /*
-    Eu preciso criar os métodos de atualizar.
-  */
-
     // Função que remove o elemento do array;
   remove (array, idIn) {
     array.forEach((item, index) => {
@@ -53,13 +49,6 @@ export class FareService {
     });
   }
 
-  findPay(payment?: string): Observable<Fare[]> {
-    let params: HttpParams;
-    if (payment) {
-      params = new HttpParams().append('paymentForm', payment);
-    }
-    return this.http.get<Fare[]>(`${URL}`, {params});
-  }
 }
 
 // atualizar(fareId: string, gasto: Fare): any {

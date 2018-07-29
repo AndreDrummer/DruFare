@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, AfterContentInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -17,7 +17,7 @@ import { month, year } from 'src/assets/arrays/datasource';
   selector: 'app-fare',
   templateUrl: './fare-main.component.html'
 })
-export class FareMainComponent implements OnInit, DoCheck, AfterContentInit {
+export class FareMainComponent implements OnInit {
   gastos: Fare[];
 
   mesU: string;
@@ -79,13 +79,6 @@ export class FareMainComponent implements OnInit, DoCheck, AfterContentInit {
     });
   }
 
-  ngDoCheck() {
-  }
-
-  ngAfterContentInit(){
-    // this.startPage();
-  }
-
   startPage() {    
     this.novoService.findOne(this.mesU, this.anoU).subscribe(response => {    
       response.forEach(item => {        
@@ -104,25 +97,7 @@ export class FareMainComponent implements OnInit, DoCheck, AfterContentInit {
       }
     })
   })
-
-    // this.novoService.find().subscribe(response => {
-    //   console.log(response);
-    //   response.filter(item => {
-    //     if (item.mes === this.mesU && item.ano === this.anoU) {
-    //       this.idEx = item._id;
-    //       item.fare.forEach(spent => {
-    //         if (spent.paymentForm === 'Cartão') {
-    //           this.cardValue += spent.value;
-    //         } else if (spent.paymentForm === 'Dinheiro') {
-    //           this.moneyValue += spent.value;
-    //         }
-    //         this.totalValue += spent.value;
-    //         this.gastos = item.fare;
-    //       });
-    //     }
-    //   });
-    // });
-  }
+}
 
   search() {
     if (this.searchForm.valid) {
@@ -152,7 +127,7 @@ export class FareMainComponent implements OnInit, DoCheck, AfterContentInit {
           });
         } else {           
           this.router.navigate(['/fares'], { queryParams: { ano, mes } });
-          // window.location.reload();          
+          window.location.reload();          
         }                   
       });                                                  
     } else {
