@@ -71,8 +71,6 @@ export class FareMainComponent implements OnInit {
     this.params();
     this.startPage();
 
-    console.log(this.mesU, this.anoU);
-
     this.searchForm = this.fb.group({
       mes: this.fb.control('', [Validators.required]),
       ano: this.fb.control('')
@@ -177,8 +175,7 @@ export class FareMainComponent implements OnInit {
     this.fareService.create(event.data._id, event.data).subscribe();
   }
 
-  update(event): void {
-    console.log(event.data);
+  update(event): void {    
     this.fareService.update(event.data._id, event.data).subscribe();
   }
 

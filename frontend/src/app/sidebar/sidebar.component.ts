@@ -9,24 +9,28 @@ import { Gastos } from './gastos/gastos.model';
 })
 export class SidebarComponent implements OnInit {
 
-  lastYear: Gastos
-  menuGastos = ['2018', '2019']
+  lastYear: string;
+  menuGastos = [
+    {
+      ano: this.lastYear
+    }
+  ]
 
   constructor(private novoService: NovoService) { }
 
   ngOnInit() {
     this.novoService.find().subscribe(res => {
       const lastSpent = res.pop();
-      // this.lastYear = lastSpent.ano;
+      this.lastYear = lastSpent.ano;
       res.forEach(item => {
-        // let ano = item.ano;
-        // let itemArray;
-        // for (itemArray in this.menuGastos) {
-        //   if (itemArray === ano) {
-        //     const obj = { ano }
-        //     this.menuGastos.push(obj);
-        //   }
-        // }
+        let ano = item.ano;
+        let itemArray;
+        for (itemArray in this.menuGastos) {
+          if (itemArray === ano) {
+            const obj: Gastos = { ano }
+            this.menuGastos.push(obj);
+          }
+        }
       })
     })
   }

@@ -10,8 +10,7 @@ import { Dashboard } from './dashboard/dashboard.model';
 export class HomeComponent implements OnInit {
 
   title = `Nenhum gasto registrado!`;
-  size: any;
-
+  anoTitle;
   gastos = [];
 
   constructor(private novoService: NovoService) { }
@@ -21,7 +20,9 @@ export class HomeComponent implements OnInit {
   }
 
   startPage() {    
-    this.novoService.find().subscribe(res => {    
+    this.novoService.find().subscribe(res => {
+      const lastSpent = res.pop();
+      this.anoTitle = lastSpent.ano;
       if (res.length > 0) {        
         res.forEach((item, index) => {
         let sum = 0;
@@ -36,8 +37,8 @@ export class HomeComponent implements OnInit {
         } else {          
           color = 'green'
         }
-        console.log(color);
           const obj = {
+            _id: item._id,
             nome: item.nome,
             mes: item.mes,
             ano: item.ano,

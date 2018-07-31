@@ -9,6 +9,6 @@ export class GastosMenuComponent  {
 
   constructor () { }
 
-  @Input() gasto: string;;
+  @Input() gasto: Gastos;
 
  }

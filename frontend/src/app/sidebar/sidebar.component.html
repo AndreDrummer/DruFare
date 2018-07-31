@@ -10,9 +10,16 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
-        <!-- <div *ngFor="let item of menuGastos"> -->
-          <app-gastos-menu></app-gastos-menu>
-        <!-- </div> -->
+        <ul class="treeview-menu">
+          <li class="treeview">
+            <a [routerLink]="['/novo']">
+              <i class="fa fa-circle-o"></i> Iniciar Novo Ciclo
+            </a>
+          </li>
+          <li *ngFor="let item of menuGastos">
+            <app-gastos-menu [gasto]="item"></app-gastos-menu>
+          </li>
+        </ul>
       </li>
     </ul>
   </section>

@@ -29,8 +29,7 @@ export class NovoService {
       return this.http.get<Novo>(`${URL}/${novoId}`);
     }
 
-    create(novo: Novo): Observable<Novo> {
-      console.log(novo);
+    create(novo: Novo): Observable<Novo> {      
       return this.http.post<Novo>(`${URL}`, novo);
     }
 
@@ -44,8 +43,7 @@ export class NovoService {
 
   // Função que inicia novo ciclo caso não tenha um igual
   newCycle(formR) {
-    const form = formR.value;
-    console.log(form);
+    const form = formR.value;  
     const ano = form.ano;
     const mes = form.mes;
     swal({

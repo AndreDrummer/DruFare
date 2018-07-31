@@ -35,8 +35,7 @@ export class FareService {
   }
 
   // Essa função cria apenas o ciclo (Mês/Ano);
-  create(gastoId: string, gasto: Fare[]): Observable<Novo> {
-    console.log(gasto);
+  create(gastoId: string, gasto: Fare[]): Observable<Novo> {    
     return this.http.put<Novo>(`${URL}/${gastoId}`, gasto);
   }
     // Função que remove o elemento do array;

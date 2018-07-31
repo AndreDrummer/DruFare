@@ -4,11 +4,10 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { GastosMenuComponent } from './sidebar/gastos/gastos-menu.component';
 import { FareModule } from './fare/fare.module';
 import { NovoModule } from './novo/novo.module';
 import { HomeModule } from './home/home.module';
+import { SidebarModule } from './sidebar/sidebar.module';
 
 import { ROUTES } from './app.routes';
 
@@ -22,9 +21,7 @@ locale('pt-BR');
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,    
-    SidebarComponent,
-    GastosMenuComponent
+    HeaderComponent
 ],
   imports: [
     BrowserModule,
@@ -32,6 +29,7 @@ locale('pt-BR');
     FareModule,
     HomeModule,
     NovoModule,
+    SidebarModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [],

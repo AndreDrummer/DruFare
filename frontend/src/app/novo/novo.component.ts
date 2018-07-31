@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import notify from 'devextreme/ui/notify';
   selector: 'app-novo',
   templateUrl: './novo.component.html'
 })
-export class NovoComponent implements OnInit, OnChanges {
+export class NovoComponent implements OnInit {
   meses = month; // Array de meses
   anos = year;  // Array de anos
 
@@ -34,16 +34,7 @@ export class NovoComponent implements OnInit, OnChanges {
       mes: this.fb.control('', [Validators.required]),
       ano: this.fb.control('',  [Validators.required]),
     });
-  }
-
-  ngOnChanges(changes: any) {
-    console.log(`ngOnChanges - data is ${this.existe}`);
-  }
-
-
-  testeNovo() {
-    this.novoService.find().subscribe(res => console.log(res));
-  }
+  } 
 
   // Função que verifica se ciclo já foi criado!
   verify() {

@@ -1,5 +1,5 @@
 <section class="content-header">
-  <h1>Gastos de {{ano}}</h1>
+  <h1>Gastos de {{anoTitle}}</h1>
   <div class="row">
     <app-botao-plus [routerLink]="['/novo']"></app-botao-plus>
   </div>
@@ -25,12 +25,3 @@
 
   </div>
 </section>
-
-<!-- <div *ngFor="let item of resumes" class="col-md-4 col-sm-8 col-xs-12">
-    <div *ngIf="item.name === 'Cartão'">
-        <app-resume [resume]="item" [value]="cardValue.toFixed(2).replace('.', ',')"></app-resume>
-    </div>
-    <div *ngIf="item.name === 'Dinheiro'">
-        <app-resume [resume]="item" [value]="moneyValue.toFixed(2).replace('.', ',')"></app-resume>
-    </div>
-  </div> -->
