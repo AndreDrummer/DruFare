@@ -11,9 +11,12 @@
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>
-    <div class="navbar-header">
-      <a [routerLink]="['/']" class="navbar-brand"><i class="fa fa-money"><b><em>&nbsp; DruFare</em></b></i> - Gerenciador de Gastos</a>
+    <div class="actived navbar-header">
+      <a [routerLink]="['/home']" [queryParams]="{ano: ano}" class="navbar-brand"><i class="fa fa-home"><b>&nbsp; Página Inicial</b></i></a>
     </div>
+    <div class="navbar-header">
+        <a class="navbar-brand"><i class="fa fa-money"><b><em>&nbsp; DruFare</em></b></i> - Gerenciador de Gastos</a>
+      </div>
   </nav>
 </header>
 

@@ -1,13 +1,12 @@
 <section class="content-header">
   <div class="col-md-12 col-sm-8 col-xs-12">
     <p *ngIf="!params()">
-      Este(s) registro(s) não faz
-      parte de nehum ciclo.
-      Vá para <a href="#">Página Inicial</a>
+      Este(s) registro(s) não faz parte de nehum ciclo. Vá para
+      <a href="#">Página Inicial</a>
       e comece um novo ciclo!`
-      </p>
+    </p>
   </div>
-<h1 *ngIf="params()">{{title}}</h1>
+  <h1 *ngIf="params()">{{title}}</h1>
 </section>
 
 <div class="row">
@@ -21,7 +20,9 @@
       <!--Barra de Pesquisa-->
       <form [formGroup]="searchForm">
         <div class="col-md-2 col-xs-2 pull-right">
-          <button type="submit" [disabled]="!searchForm.valid" class="btn btn-sm btn-default" (click)="search()" ><i class="fa fa-search" aria-hidden="true"></i></button>
+          <button type="submit" [disabled]="!searchForm.valid" class="btn btn-sm btn-default" (click)="search()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
         </div>
         <div class="col-md-2 col-xs-4 pull-right">
           <dx-select-box formControlName='mes' [placeholder]="mesU" [dataSource]="mesSearch"></dx-select-box>
@@ -30,11 +31,11 @@
           <dx-select-box formControlName='ano' [placeholder]="anoU" [dataSource]="anoSearch"></dx-select-box>
         </div>
       </form>
-      <!--Fim barra de pesquisa-->
+      <!--Fim barra de pesquisa-->      
     </div>
-
+    
     <!--Botão Add-->
-    <app-botao-plus (click)="NovoGasto()"></app-botao-plus>    
+    <app-botao-plus (click)="NovoGasto()"></app-botao-plus>
     <!--Fim do botão Add-->
   </div>
 </div>
@@ -46,25 +47,25 @@
       <div class="row">
         <div *ngFor="let item of resumes" class="col-md-4 col-sm-8 col-xs-12">
           <div *ngIf="item.name === 'Cartão'">
-              <app-resume [resume]="item" [value]="cardValue.toFixed(2).replace('.', ',')"></app-resume>
+            <app-resume [resume]="item" [value]="cardValue.toFixed(2).replace('.', ',')"></app-resume>
           </div>
           <div *ngIf="item.name === 'Dinheiro'">
-              <app-resume [resume]="item" [value]="moneyValue.toFixed(2).replace('.', ',')"></app-resume>
+            <app-resume [resume]="item" [value]="moneyValue.toFixed(2).replace('.', ',')"></app-resume>
           </div>
         </div>
 
         <div class="col-md-4 col-sm-8 col-xs-12">
           <div class="info-box">
-              <span class="info-box-icon bg-green">
-                <i class="fa fa-dollar"></i>
-              </span>
-              <div class="info-box-content">
-                <span class="info-box-text">Total Gasto</span>
-                <h3>
-                  <b>R$ {{totalValue.toFixed(2).replace('.', ',')}}</b>
-                </h3>
-              </div>
+            <span class="info-box-icon bg-green">
+              <i class="fa fa-dollar"></i>
+            </span>
+            <div class="info-box-content">
+              <span class="info-box-text">Total Gasto</span>
+              <h3>
+                <b>R$ {{totalValue.toFixed(2).replace('.', ',')}}</b>
+              </h3>
             </div>
+          </div>
         </div>
 
       </div>
@@ -75,14 +76,8 @@
   <!--Inserção da Grid-->
   <div class="row">
     <div class="col-md-11 col-sm-8 col-xs-12">
-      <dx-data-grid
-        [dataSource]="gastos"
-        [showColumnLines]="true"
-        [showRowLines]="true"
-        [showBorders]="true"
-        [rowAlternationEnabled]="true"
-        [columnAutoWidth]="true"
-        (onRowRemoved)="delete($event)">
+      <dx-data-grid [dataSource]="gastos" [showColumnLines]="true" [showRowLines]="true" [showBorders]="true" [rowAlternationEnabled]="true"
+        [columnAutoWidth]="true" (onRowRemoved)="delete($event)">
 
         <dxo-paging [pageSize]="15"></dxo-paging>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -91,10 +86,7 @@
         <dxo-search-panel [visible]="true"></dxo-search-panel>
         <dxo-grouping [contextMenuEnabled]="true"></dxo-grouping>
 
-        <dxo-editing
-          mode="form"
-          [allowDeleting]="true"
-          [useIcons]="true">
+        <dxo-editing mode="form" [allowDeleting]="true" [useIcons]="true">
         </dxo-editing>
 
         <dxi-column dataField="name" caption="Nome" cellTemplate="nameTemplate"></dxi-column>

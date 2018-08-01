@@ -28,27 +28,23 @@ export class DashboardComponent {
     this.router.navigate(['/fares'], { queryParams: { ano: this.ano, mes: this.mes } })
   }
 
-  delete(event) {
+  delete(dado) {
     swal({
-      title: 'Tem certeza que quer excluir este gasto?',
+      title: 'Tem certeza que quer excluir os gastos deste mês?',
       buttons: {
         cancel: { text: 'Não', visible: true },
-        cnfirm: { text: 'Sim, pode excluir.' }
+        confirm: { text: 'Sim, pode excluir.' }
       },
       dangerMode: true
     }).then(willDelete => {
       return new Promise(resolve => {
         if (willDelete) {
-          this.novoService.delete(event._id).subscribe();
+          this.novoService.delete(dado._id).subscribe();
           window.location.reload();
         } else {
           resolve();
         }
       });
-    }).then(del => {
-      if (del) {
-        window.location.reload();
-      }
     });
   }
 }

@@ -78,7 +78,7 @@ export class FareMainComponent implements OnInit {
   }
 
   startPage() {    
-    this.novoService.findOne(this.mesU, this.anoU).subscribe(response => {    
+    this.novoService.findOne(this.anoU, this.mesU).subscribe(response => {    
       response.forEach(item => {        
         this.idEx = item._id;
         if (this.mesU === undefined){}
@@ -101,23 +101,24 @@ export class FareMainComponent implements OnInit {
     if (this.searchForm.valid) {
       const search = this.searchForm.value;      
       const mes = search.mes;
-      let ano = search.ano;      
+      let ano = search.ano;
       if (!ano){
         ano = this.anoU;
-      }      
-      this.novoService.findOne(mes, ano).subscribe(res => {
+      }
+      this.novoService.findOne(ano, mes).subscribe(res => {
         if (res.length === 0) {
           swal({
-            title: 'Você ainda não criou esse ciclo de gastos. Deseja cria-lo agora?',
+            title: 'Não encontrado!',
             buttons: {
-              cancel: { text: 'Agora não', visible: true},
-              confirm: { text: 'Beleza, pode criar então'}
+              cancel: { text: 'Fechar', visible: true},
+              confirm: { text: 'Começar esse mês'},
             },
+            icon: 'warning',
             dangerMode: true
           }).then(willCreate => {
             return new Promise (resolve => {
               if (willCreate) {                
-                this.novoService.newCycle(this.searchForm);
+                this.novoService.newCycle(this.searchForm, ano);
               }  else {
                 resolve();
               }

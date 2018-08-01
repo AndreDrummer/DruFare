@@ -10,16 +10,24 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
-        <ul class="treeview-menu">
-          <li class="treeview">
-            <a [routerLink]="['/novo']">
-              <i class="fa fa-circle-o"></i> Iniciar Novo Ciclo
+        <ul class="treeview-menu">          
+          <li *ngIf="menuGastos.length === 0">
+            <a>
+                <i class="fa fa-file-o"></i> Nenhum gasto inicializado              
             </a>
           </li>
           <li *ngFor="let item of menuGastos">
-            <app-gastos-menu [gasto]="item"></app-gastos-menu>
+              <a [routerLink]="['/home']" [queryParams]="{ano: item}" (click)="changeYear()">
+                  <i class="fa fa-calendar-o"></i>{{item}}
+              </a>            
           </li>
         </ul>
+      </li>
+      <li class="treeview">
+        <a [routerLink]="['/novo']">
+          <i class="fa fa-pencil"></i>
+          <span>Iniciar Novo Gasto</span>          
+        </a>
       </li>
     </ul>
   </section>

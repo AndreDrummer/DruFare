@@ -1,37 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NovoService } from '../novo/novo.service';
-import { Gastos } from './gastos/gastos.model';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
 })
+
 export class SidebarComponent implements OnInit {
 
-  lastYear: string;
-  menuGastos = [
-    {
-      ano: this.lastYear
-    }
-  ]
+  menuGastos = [];
+  yearParams: string;
 
-  constructor(private novoService: NovoService) { }
+  constructor(
+    private novoService: NovoService
+  ) { }
 
   ngOnInit() {
     this.novoService.find().subscribe(res => {
-      const lastSpent = res.pop();
-      this.lastYear = lastSpent.ano;
+      if (res.length > 0) {
+        const lastSpent = res.pop();
+        this.insertInto(this.menuGastos, lastSpent.ano);
+      }
       res.forEach(item => {
         let ano = item.ano;
-        let itemArray;
-        for (itemArray in this.menuGastos) {
-          if (itemArray === ano) {
-            const obj: Gastos = { ano }
-            this.menuGastos.push(obj);
-          }
-        }
+        this.insertInto(this.menuGastos, ano);
       })
     })
+  }
+
+  changeYear() {
+    window.location.reload();
+  }
+
+  insertInto(array, element) {
+    if (!array.includes(element)) {
+      array.push(element);
+    }
   }
 }

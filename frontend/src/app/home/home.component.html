@@ -1,14 +1,17 @@
 <section class="content-header">
-  <h1>Gastos de {{anoTitle}}</h1>
+  <h1>Gastos {{anoTitle}}</h1>
   <div class="row">
     <app-botao-plus [routerLink]="['/novo']"></app-botao-plus>
   </div>
 </section>
 
 <div *ngIf="gastos.length === 0" class="col-md-9 col-sm-9 col-xs-12">
-  <div class="callout callout-warning">  
+  <div style="margin-top: 10px;" class="callout callout-warning">  
     <h4>{{title}}</h4>
-    <p>Para registrar um novo clique em &nbsp;<i class="fa fa-plus"></i></p>
+    <p>
+      Para registrar um novo clique em &nbsp;<i class="fa fa-plus"></i><br/>
+      Ou clique em Iniciar Novo Gasto ao lado &nbsp; <i class="fa fa-hand-o-left"></i>
+    </p>
   </div>  
 </div>
 

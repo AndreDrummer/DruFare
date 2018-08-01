@@ -13,60 +13,76 @@ export class NovoService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-    findOne(mes?: string, ano?: string): Observable<Novo[]> {
-      let params: HttpParams;
-      if (mes !== undefined && ano !== undefined ) {        
-        params = new HttpParams().append('mes', mes).append('ano', ano);
-      }
-      return this.http.get<Novo[]>(`${URL}`, {params});
+  findOne(ano: string, mes: string): Observable<Novo[]> {
+    let params: HttpParams;
+    if (mes !== undefined) {
+      params = new HttpParams().append('ano', ano).append('mes', mes);
     }
+    return this.http.get<Novo[]>(`${URL}`, { params });
+  }
 
-    find(): Observable<Novo[]> {
-      return this.http.get<Novo[]>(`${URL}`);
+  findYear(ano: string): Observable<Novo[]> {
+    let params: HttpParams;
+    if (ano !== undefined) {
+      params = new HttpParams().append('ano', ano);      
     }
+    return this.http.get<Novo[]>(`${URL}`, { params });
+  }
 
-    findById(novoId: string): Observable<Novo> {
-      return this.http.get<Novo>(`${URL}/${novoId}`);
-    }
 
-    create(novo: Novo): Observable<Novo> {      
-      return this.http.post<Novo>(`${URL}`, novo);
-    }
+  find(): Observable<Novo[]> {
+    return this.http.get<Novo[]>(`${URL}`);
+  }
 
-    update(novoId: string, novo: Novo): Observable<Novo> {
-      return this.http.put<Novo>(`${URL}/${novoId}`, novo);
-    }
+  findById(novoId: string): Observable<Novo> {
+    return this.http.get<Novo>(`${URL}/${novoId}`);
+  }
 
-    delete(novoId: string): Observable<any> {
-      return this.http.delete<Novo>(`${URL}/${novoId}`);
-    }
+  create(novo: Novo): Observable<Novo> {
+    return this.http.post<Novo>(`${URL}`, novo);
+  }
+
+  update(novoId: string, novo: Novo): Observable<Novo> {
+    return this.http.put<Novo>(`${URL}/${novoId}`, novo);
+  }
+
+  delete(novoId: string): Observable<any> {
+    return this.http.delete<Novo>(`${URL}/${novoId}`);
+  }
 
   // Função que inicia novo ciclo caso não tenha um igual
-  newCycle(formR) {
-    const form = formR.value;  
-    const ano = form.ano;
+  newCycle(formR, year?) {
+    const form = formR.value;
+    let ano = form.ano;
+    if (!ano){
+      ano = year;
+    }
     const mes = form.mes;
     swal({
-      title: 'Iniciar Novo Ciclo de Gastos?',
+      title: 'Deseja iniciar um novo ciclo de gastos?',
       buttons: {
-        cancel: { text: 'Calma ae.', visible: true },
-        confirm: { text: 'Iniciar'}    },
+        cancel: { text: 'Espere', visible: true },
+        confirm: { text: 'Iniciar' }
+      },
       dangerMode: true
     }).then(willSave => {
-      return new Promise (resolve => {
+      return new Promise(resolve => {
         if (willSave) {
-          form.nome = mes+' de '+ano;
-          this.create(form).subscribe(res => resolve(res));          
+          if (!form.ano)
+          form.ano = year;
+          form.nome = mes + ' de ' + ano;
+          this.create(form).subscribe(res => resolve(res));
         } else {
           resolve();
         }
       }).then((novo: any) => {
         if (novo) {
-          this.router.navigate(['/fares'], { queryParams: {ano: ano, mes: mes}});
-          swal('Ciclo Iniciado!', {icon: 'success'});
+          this.router.navigate(['/fares'], { queryParams: { ano: ano, mes: mes } });
+          swal('Ciclo Iniciado!', { icon: 'success' });
+          window.location.reload();
         }
       });
-    });    
+    });
   }
 }
 

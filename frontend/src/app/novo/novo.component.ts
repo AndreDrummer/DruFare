@@ -32,7 +32,7 @@ export class NovoComponent implements OnInit {
   ngOnInit() {
     this.novoForm = this.fb.group({
       mes: this.fb.control('', [Validators.required]),
-      ano: this.fb.control('',  [Validators.required]),
+      ano: this.fb.control('',  [Validators.required]),    
     });
   } 
 
@@ -43,7 +43,7 @@ export class NovoComponent implements OnInit {
       this.mes = novo.mes;
       this.ano = novo.ano;
 
-      this.novoService.findOne(this.mes, this.ano).subscribe(res => {
+      this.novoService.findOne(this.ano, this.mes).subscribe(res => {
           if (res.length === 0) {
             this.novoService.newCycle(this.novoForm);
           } else if (res.length > 0) {

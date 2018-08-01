@@ -23,7 +23,7 @@ export class FareFormComponent implements OnInit {
   ano: string;
   mes: string;
   _idIn: string;
-  textButton: string;
+  textButton: string = 'Registrar';
 
   // idEx é o id do elemento Mes/Ano o id Externo;
   get idEx(): string {
@@ -86,8 +86,8 @@ export class FareFormComponent implements OnInit {
         title: `${this.isEditing() ? 'Atualizar' : 'Registrar'} gasto?`,
         icon: 'warning',
         buttons: {
-          cancel: { text: 'Calma aí', visible: true},
-          confirm: { text: `Pode ${this.isEditing() ? 'Atualizar' : 'Registrar'}.`},
+          cancel: { text: 'Espere', visible: true},
+          confirm: { text: `Pode ${this.isEditing() ? 'Atualizar' : 'Registrar'}`},
         },
         dangerMode: true
       }).then(willSave => {
