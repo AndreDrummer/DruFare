@@ -79,7 +79,7 @@ export class NovoService {
         if (novo) {
           this.router.navigate(['/fares'], { queryParams: { ano: ano, mes: mes } });
           swal('Ciclo Iniciado!', { icon: 'success' });
-          window.location.reload();
+          // window.location.reload();
         }
       });
     });

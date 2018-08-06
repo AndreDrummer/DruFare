@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { SidebarComponent } from './sidebar.component';
 import { SidebarRoutingModule } from './sidebar.routing';
-import { GastosMenuComponent } from './gastos/gastos-menu.component';
 
 @NgModule({
     imports: [
@@ -11,8 +10,7 @@ import { GastosMenuComponent } from './gastos/gastos-menu.component';
         SidebarRoutingModule
     ],
     declarations: [
-        SidebarComponent,
-        GastosMenuComponent
+        SidebarComponent        
     ],
     exports: [
         SidebarComponent

@@ -1,14 +1,23 @@
 const express = require('express')
+const auth = require('./auth')
 
-module.exports = function(server){
-  //Definir URL base
-  const router = express.Router();
-  server.use('/api', router);
+module.exports = function (server) {
 
-  //Rotas relacionadas aos Spents
-  const spents = require('../api/spents/spentsService');
+  // Rotas Protegidas por Token JWT
+  const protectedApi = express.Router()
+  server.use('/api', protectedApi)
+
+  protectedApi.use(auth);
+
   const cycles = require('../api/cycles/cyclesService');
-  spents.register(router, '/spents');
-  cycles.register(router, '/cycles');
-  
+  cycles.register(protectedApi, '/cycles');
+
+  // Rotas abertas
+  const openApi = express.Router()
+  server.use('/oapi', openApi);
+
+  const AuthService = require('../api/user/authService');
+  openApi.post('/login', AuthService.login);
+  openApi.post('/signup', AuthService.signUp);
+  openApi.post('/valdateToken', AuthService.validateToken);
 }

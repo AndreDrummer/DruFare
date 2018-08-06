@@ -1,6 +1,5 @@
 const restful = require('node-restful');
 const mongoose = restful.mongoose;
-const beauty = require('mongoose-beautiful-unique-validation')
 
 const spentsSchema = new mongoose.Schema({
   name: { type: String, required: true },
